@@ -1,7 +1,8 @@
 import {Input,Button} from 'antd'
 import {NewClasses} from '../../api/class'
 import {useState} from 'react'
-const NewClass = ({setOpen}:{setOpen:(open:boolean)=>void}) =>{
+import type { Class } from '../../type/class/index'
+const NewClass = ({setOpen,setList,list}:{setOpen:(open:boolean)=>void,setList:(list:Class[])=>void,list:Class[]}) =>{
     const [input,setInput] = useState('')
     return (
         <div>
@@ -10,7 +11,15 @@ const NewClass = ({setOpen}:{setOpen:(open:boolean)=>void}) =>{
                 <Button type='primary' onClick={()=>NewClasses(input).then(res=>{
                  console.log(res)
                  if(res.data.code === 200){
-                    alert('创建成功')
+                 
+                    setList([...list,{
+                        id:1,
+                        classCode:input,
+                        gmtCreate:new Date().toISOString(),
+                        currentStudents:0,
+                        tid:1,
+                    }])
+                       alert('创建成功')
                     setOpen(false)
                  }
                 })} >创建班级</Button>
