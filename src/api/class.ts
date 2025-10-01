@@ -31,3 +31,16 @@ export const uploadStudent = (id:number,sno:string,name:string)=>{
            name:name,
     })
 }
+
+export const DeleteClass = (id:number)=>{
+    return request.delete(`/class/${id}`)
+}
+
+export const uploadClass = (formData: FormData) => {
+    return request.post('/class/upload', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+    })
+}
+export const DeleteStudent = (data:number[])=>{
+    return request.delete('/class/student',{data})
+}

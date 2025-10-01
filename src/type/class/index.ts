@@ -12,7 +12,13 @@ export interface ClassStudent {
     key: string
 }
 export interface ClassStudentList {
+  id:number
   cid:number
   sno:string
   name:string
+}
+
+export interface ClassUpload {
+    file:File,
+    id:number,
 }

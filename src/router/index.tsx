@@ -12,6 +12,8 @@ const Class = lazy(() => import('../page/admir/class/index'))
 const User = lazy(() => import('../page/user/class/index'))
 const UserClass = lazy(() => import('../page/user/class/userclass'))
 const ClassDetail = lazy(() => import('../page/admir/class/Detail'))
+const BaseGame = lazy(() => import('../commpent/class/baseGame'))
+const ClassGame = lazy(() => import('../commpent/class/Classgame'))
 const router =[
   {
     path:'/login',
@@ -64,7 +66,23 @@ const router =[
             <ClassDetail/>
           </Suspense>
         )
-      }
+      },
+      {
+        path:'/admir/class/baseGame/:id',
+        element:(
+          <Suspense fallback={<div style={{display:'flex',justifyContent:'center',alignItems:'center'}}><Spin/></div>}>
+            <BaseGame/>
+          </Suspense>
+        )
+      },
+      {
+        path:'/admir/class/game/:id',
+        element:(
+          <Suspense fallback={<div style={{display:'flex',justifyContent:'center',alignItems:'center'}}><Spin/></div>}>
+            <ClassGame/>
+          </Suspense>
+        )
+      },
     ]
   },
   {

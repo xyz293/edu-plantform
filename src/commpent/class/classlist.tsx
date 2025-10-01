@@ -4,7 +4,7 @@ import type { Class } from '../../type/class/index';
 import { useNavigate } from 'react-router-dom';
 import { Button, Card, Typography, Space } from 'antd';
 import { UserOutlined, CalendarOutlined } from '@ant-design/icons';
-
+import {DeleteClass} from '../../api/class'
 const { Title, Text } = Typography;
 
 const CARD_HEIGHT = 180; // 单个卡片高度
@@ -95,7 +95,7 @@ const List = ({ list, setList }: { list: Class[]; setList: (list: Class[]) => vo
                       <Text type="secondary">创建时间：{formatDate(item.gmtCreate)}</Text>
                     </div>
 
-                    <div style={{ textAlign: 'right', marginTop: '4px' }}>
+                    <div style={{ textAlign: 'right', marginTop: '4px' ,marginRight:'12px'}}>
                       <Button
                         type="primary"
                         size="small"
@@ -103,6 +103,18 @@ const List = ({ list, setList }: { list: Class[]; setList: (list: Class[]) => vo
                         onClick={() => navigate(`/admir/class/detail/${item.id}`)}
                       >
                         查看详情
+                      </Button>
+                      <Button
+                         type="primary"
+                        size="small"
+                        shape="round"
+                        onClick={() => DeleteClass(item.id).then((res) => {
+                          if (res.data?.code === 200) {
+                            setList(list.filter((i) => i.id !== item.id));
+                          }
+                        })}
+                      >
+                        删除班级
                       </Button>
                     </div>
                   </Space>

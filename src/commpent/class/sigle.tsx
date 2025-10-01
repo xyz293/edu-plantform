@@ -4,6 +4,7 @@ import type {ClassStudentList} from '../../type/class/index'
 import {useState} from 'react'
 const Single = ({id,studentList,setStudentList,setOpen}:{id:number,studentList:ClassStudentList[],setStudentList:(list:ClassStudentList[])=>void,setOpen:(open:boolean)=>void})=>{
     const [user,setUser] = useState({
+        id:id,
         sno:'',
         name:''
     })
@@ -12,6 +13,7 @@ const Single = ({id,studentList,setStudentList,setOpen}:{id:number,studentList:C
       console.log(res)
                      if(res.data.code === 200){
                         setStudentList([...studentList,{
+                            id:studentList.length+1,
                             cid:id,
                             sno:user.sno,
                             name:user.name
