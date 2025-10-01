@@ -1,26 +1,37 @@
 import { getClass } from '../../api/class';
-import { useEffect} from 'react';
-import type { Class } from '../../type/class/index'
+import { useEffect, useRef, useState } from 'react';
+import type { Class } from '../../type/class/index';
 import { useNavigate } from 'react-router-dom';
 import { Button, Card, Typography, Space } from 'antd';
 import { UserOutlined, CalendarOutlined } from '@ant-design/icons';
 
 const { Title, Text } = Typography;
 
-const List = ({list,setList}:{list:Class[],setList:(list:Class[])=>void}) => {
-  
+const CARD_HEIGHT = 180; // 单个卡片高度
+
+const List = ({ list, setList }: { list: Class[]; setList: (list: Class[]) => void }) => {
   const navigate = useNavigate();
+  const listRef = useRef<HTMLDivElement>(null);
+  const [index, setIndex] = useState(0);
+
+  const scrollToIndex = () => {
+    if (listRef.current !== null) {
+      const i = Math.floor(listRef.current.scrollTop / CARD_HEIGHT);
+      setIndex(i);
+    }
+  };
+
+  const classItem = list.slice(index, index + Math.ceil(400 / CARD_HEIGHT));
 
   useEffect(() => {
-    getClass(1, 10, '').then((res) => {
-      console.log(res);
+    getClass(1, 50, '').then((res) => {
       if (res.data?.code === 200) {
         setList(res.data.data?.list || []);
       }
     });
   }, []);
 
-  // 可选：格式化时间（示例）
+  // 时间格式化
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);
     return date.toLocaleDateString('zh-CN', {
@@ -33,62 +44,73 @@ const List = ({list,setList}:{list:Class[],setList:(list:Class[])=>void}) => {
   };
 
   return (
-    <div style={{ padding: '24px' }}>
+    <div style={{ padding: '24px', background: '#f7f8fa', minHeight: '100vh' }}>
       <Title level={3} style={{ marginBottom: '24px', textAlign: 'center' }}>
         班级列表
       </Title>
+
       <div
+        onScroll={scrollToIndex}
+        ref={listRef}
         style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-          gap: '24px',
-          justifyContent: 'center',
+          height: '400px',
+          overflowY: 'auto',
+          position: 'relative',
+          borderRadius: '12px',
+          border: '1px solid #f0f0f0',
+          background: '#fff',
+          padding: '12px',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
         }}
       >
-        {list.map((item) => (
-          <Card
-            key={item.id}
-            hoverable
-            style={{
-              width: '100%',
-              maxWidth: '320px',
-              borderRadius: '12px',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
-              transition: 'transform 0.2s',
-            }}
-            bodyStyle={{ padding: '20px' }}
-
-          >
+        {/* 占位容器 */}
+        <div style={{ height: list.length * CARD_HEIGHT + 'px', position: 'relative' }}>
+          {/* 渲染可见区域 */}
+          <div style={{ position: 'absolute', top: index * CARD_HEIGHT + 'px', left: '0', right: '0' }}>
             <Space direction="vertical" size="middle" style={{ width: '100%' }}>
-              <div>
-                <Text strong>班级编码：</Text>
-                <Text copyable>{item.classCode}</Text>
-              </div>
+              {classItem.map((item) => (
+                <Card
+                  key={item.id}
+                  hoverable
+                  style={{
+                    borderRadius: '12px',
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+                    transition: 'all 0.25s ease',
+                  }}
+                  bodyStyle={{ padding: '16px 20px' }}
+                >
+                  <Space direction="vertical" size="small" style={{ width: '100%' }}>
+                    <div>
+                      <Text strong style={{ fontSize: '15px' }}>班级编码：</Text>
+                      <Text copyable>{item.classCode}</Text>
+                    </div>
 
-              <div>
-                <Text>
-                  <UserOutlined style={{ marginRight: '6px', color: '#1890ff' }} />
-                  当前人数：{item.currentStudents}
-                </Text>
-              </div>
+                    <div>
+                      <UserOutlined style={{ marginRight: '6px', color: '#1890ff' }} />
+                      <Text>当前人数：{item.currentStudents}</Text>
+                    </div>
 
-              <div>
-                <Text type="secondary">
-                  <CalendarOutlined style={{ marginRight: '6px' }} />
-                  创建时间：{formatDate(item.gmtCreate)}
-                </Text>
-              </div>
+                    <div>
+                      <CalendarOutlined style={{ marginRight: '6px', color: '#999' }} />
+                      <Text type="secondary">创建时间：{formatDate(item.gmtCreate)}</Text>
+                    </div>
 
-              <div style={{ textAlign: 'right', marginTop: '8px' }}>
-                <Button type="primary" size="small" onClick={() => {
-                  navigate(`/admir/class/detail/${item.id}`);
-                }}>
-                  查看详情
-                </Button>
-              </div>
+                    <div style={{ textAlign: 'right', marginTop: '4px' }}>
+                      <Button
+                        type="primary"
+                        size="small"
+                        shape="round"
+                        onClick={() => navigate(`/admir/class/detail/${item.id}`)}
+                      >
+                        查看详情
+                      </Button>
+                    </div>
+                  </Space>
+                </Card>
+              ))}
             </Space>
-          </Card>
-        ))}
+          </div>
+        </div>
       </div>
     </div>
   );
