@@ -5,16 +5,22 @@ import {getClassStudent,DeleteStudent} from '../../../api/class'
 import {Input,Button,Modal} from 'antd'
 import Single from '../../../commpent/class/sigle'
 import type {ClassStudentList} from '../../../type/class/index'
-import {useNavigate} from 'react-router-dom'
+import type { Class } from '../../../type/class/index';
 import Upload from '../../../commpent/class/upload'
 const Detail = ()=>{
     const params = useParams()
-    const navigate = useNavigate()
     const [open,setOpen] = useState(false)
       const id = params.id
     const [input,setInput] = useState('')
     const [soru,setSoru] = useState(1)
     const [checkedList,setCheckedList] = useState<number[]>([])
+    const [classDetail,setClassDetail] = useState<Class>({
+    id: Number(id),
+   classCode: '',
+   gmtCreate: '',
+   currentStudents: 0,
+   tid: 0
+    })
     const show = ()=>{
         switch(soru){
             case 1:
@@ -40,6 +46,7 @@ const Detail = ()=>{
        ]).then(([classDetail,classStudent])=>{
         console.log(classDetail)
         console.log(classStudent)
+        setClassDetail(classDetail.data.data)
         setStudentList(classStudent.data.data.list)
        })
     },[page])
@@ -62,15 +69,19 @@ const Detail = ()=>{
             })
            }}>搜索</Button>
            </div>
+           <div style={{display:'flex',justifyContent:'space-between',gap:'20px'}} >
+            <div style={{display:'flex',justifyContent:'flex-start',gap:'20px'}}>
+              <div>{classDetail.classCode} </div>
+              <div>当前人数：{classDetail.currentStudents}</div>
+           </div>
            <div style={{display:'flex',justifyContent:'flex-end',gap:'20px'}}>
            
               <Button type='primary' size='small' onClick={()=>{setSoru(2);setOpen(true)}}>单个添加</Button>
   
               <Button type='primary' size='small' onClick={()=>{setSoru(1);setOpen(true)}}>批量添加</Button>
+
               
-              <Button type='primary' size='small' onClick={()=>navigate(`/admir/class/baseGame/${id}`)}>创建游戏</Button>
-                  <Button type='primary' size='small' onClick={()=>navigate(`/admir/class/game/${id}`)}>查看游戏</Button>
-              
+           </div>
            </div>
            <div>
              <Modal 

@@ -12,8 +12,11 @@ const Class = lazy(() => import('../page/admir/class/index'))
 const User = lazy(() => import('../page/user/class/index'))
 const UserClass = lazy(() => import('../page/user/class/userclass'))
 const ClassDetail = lazy(() => import('../page/admir/class/Detail'))
-const BaseGame = lazy(() => import('../commpent/class/baseGame'))
-const ClassGame = lazy(() => import('../commpent/class/Classgame'))
+const BaseGame = lazy(() => import('../commpent/game/baseGame'))
+const GameControl =lazy(() => import('../page/admir/game/index'))
+const BaseUser = lazy(() => import('../page/admir/user/index'))
+const BaseGameControl = lazy(() => import('../commpent/game/baseGame'))
+const Gamelist = lazy(() => import('../commpent/game/gameList'))
 const router =[
   {
     path:'/login',
@@ -76,13 +79,39 @@ const router =[
         )
       },
       {
-        path:'/admir/class/game/:id',
+        path:'/admir/game',
         element:(
           <Suspense fallback={<div style={{display:'flex',justifyContent:'center',alignItems:'center'}}><Spin/></div>}>
-            <ClassGame/>
+            <GameControl/>
+          </Suspense>
+        ),
+        children:[
+          {
+            path:'/admir/game/baseGameControl',
+            element:(
+              <Suspense fallback={<div style={{display:'flex',justifyContent:'center',alignItems:'center'}}><Spin/></div>}>
+                <BaseGameControl/>
+              </Suspense>
+            )
+          },
+          {
+            path:'/admir/game/list',
+            element:(
+              <Suspense fallback={<div style={{display:'flex',justifyContent:'center',alignItems:'center'}}><Spin/></div>}>
+                <Gamelist/>
+              </Suspense>
+            )
+          }
+        ]
+      },
+      {
+        path:'/admir/user',
+        element:(
+          <Suspense fallback={<div style={{display:'flex',justifyContent:'center',alignItems:'center'}}><Spin/></div>}>
+            <BaseUser/>
           </Suspense>
         )
-      },
+      }
     ]
   },
   {

@@ -3,11 +3,17 @@ import { Form, Input, Button, message } from 'antd';
 import type { Game } from '../../type/game/index';
 import { NewGame } from '../../api/game';
 import { useState } from 'react';
-
+import Teamlist from './teamList'
+import type {Team } from '../../type/Team/index'
 const BaseGame = () => {
   const params = useParams();
   const id = params.id;
-
+   const [team,setTeam] = useState<Team>({
+    gameId:0,
+    studentNum:0,
+    teamNum:0,
+   })
+   
   const [game, setGame] = useState<Game>({
     file: null, // 初始不要用 new File([], '')
     teamNum: 0,
@@ -35,6 +41,11 @@ const BaseGame = () => {
     try {
       const res = await NewGame(formData); // 确保 NewGame 内部 axios.post 不手动设置 Content-Type
       console.log('上传成功', res);
+      setTeam({
+        gameId:Number(res.data.data.gameId),
+        studentNum:Number(res.data.data.studentNum),
+        teamNum:Number(res.data.data.teamNum),
+      })
       message.success('上传成功！');
     } catch (err) {
       console.error('上传失败', err);
@@ -45,8 +56,9 @@ const BaseGame = () => {
   };
 
   return (
-    <div>
-      <Form layout="vertical">
+    <div style={{display:'flex',justifyContent:'space-between'}}>
+     <div style={{width:'50%',display:'flex',justifyContent:'flex-start'}}>
+         <Form layout="vertical">
         <Form.Item label="分组文件">
           <input
             type="file"
@@ -95,6 +107,10 @@ const BaseGame = () => {
           </Button>
         </Form.Item>
       </Form>
+     </div>
+     <div style={{width:'45%',display:'flex',justifyContent:'flex-end'}}>
+      <Teamlist id={team.gameId}/>
+     </div>
     </div>
   );
 };

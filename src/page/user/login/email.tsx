@@ -12,7 +12,7 @@ const Login = () => {
     code:'',
     type:0
    })
-   const {setToken,setId,setAvatar,setNickname} = userStore()
+   const {setToken,setId,setAvatar,setNickname,setEmail} = userStore()
   return (
     <div
       style={{
@@ -57,6 +57,7 @@ const Login = () => {
                   setId(res.data.data.id)
                   setAvatar(res.data.data.avatar)
                   setNickname(res.data.data.nickname)
+                  setEmail(res.data.data.username)
                   navigate('/user')
                 }
                })

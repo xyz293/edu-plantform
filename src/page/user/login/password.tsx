@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import {login} from '../../../api/login'
 import type {Logininfo} from '../../../type/user/index'
 import {useState} from 'react'
+import userStore from '../../../store/index'
 const Login = () => {
   const navigate = useNavigate();
+   const {setToken,setId,setAvatar,setNickname,setEmail} = userStore()
   const [user,setUser] = useState<Logininfo>({
     username:'',
     password:'',
@@ -31,7 +33,7 @@ const Login = () => {
         }}
       >
         <Form.Item label="用户名">
-          <Input placeholder="请输入用户名"  value={user?.username} onChange={(e) => setUser({...user as Logininfo,username:e.target.value})} />
+          <Input placeholder="请输入邮箱"  value={user?.username} onChange={(e) => setUser({...user as Logininfo,username:e.target.value})} />
         </Form.Item>
 
         <Form.Item label="密码">
@@ -44,6 +46,14 @@ const Login = () => {
               setUser({...user as Logininfo,type:1})
               login(user).then(res=>{
                 console.log(res)
+                if(res.data.code === 200){
+                setToken(res.data.data.token)
+                  setId(res.data.data.id)
+                  setAvatar(res.data.data.avatar)
+                  setNickname(res.data.data.nickname)
+                   setEmail(res.data.data.username)
+                  navigate('/admir')
+                }
               })
             }
           }}>
