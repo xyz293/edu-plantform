@@ -12,7 +12,7 @@ const Control= ()=>{
       }
     },[])
     return (
-        <div>
+        <div style={{display:"flex",flexDirection: 'column',gap:'10px'}}>
         <div style={{display:'flex',justifyContent:'flex-start',gap:'20px'}}>
             <Button type='primary' onClick={()=>navigate('/admir/game/list')}>游戏管理</Button>
               <Button type='primary' onClick={()=>navigate('/admir/game/baseGameControl')}>游戏设置</Button>

@@ -5,3 +5,10 @@ export interface Game{
     perTeamNum:number,
     cid:number,
 }
+
+export interface GameList{
+    gmtCreate:string
+    status:number,
+    studentCount:number,
+    teamCount:number,
+}

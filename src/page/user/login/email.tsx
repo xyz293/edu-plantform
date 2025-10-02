@@ -58,7 +58,7 @@ const Login = () => {
                   setAvatar(res.data.data.avatar)
                   setNickname(res.data.data.nickname)
                   setEmail(res.data.data.username)
-                  navigate('/user')
+                  navigate('/admir')
                 }
                })
             }}>
