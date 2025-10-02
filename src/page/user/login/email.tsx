@@ -1,9 +1,9 @@
 import { Button, Input, Form, Space } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import {sendCode} from '../../../api/login'
+import {sendCode} from '../../../api/user'
 import {useState} from 'react'
 import type {Logininfo} from '../../../type/user/index'
-import {login} from '../../../api/login'
+import {login} from '../../../api/user'
 import userStore from '../../../store/index'
 const Login = () => {
   const navigate = useNavigate();

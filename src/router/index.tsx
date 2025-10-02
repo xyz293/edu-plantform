@@ -10,11 +10,12 @@ const PasswordLogin = lazy(() => import('../page/user/login/password'))
 const Admir = lazy(() => import('../page/user/admir/index'))
 const Class = lazy(() => import('../page/user/admir/class/index'))
 const ClassDetail = lazy(() => import('../page/user/admir/class/Detail'))
-const BaseGame = lazy(() => import('../commpent/game/baseGame'))
+const BaseGame = lazy(() => import('../commpent/game/base/baseGame'))
 const GameControl =lazy(() => import('../page/user/admir/game/index'))
 const BaseUser = lazy(() => import('../page/user/admir/user/index'))
-const BaseGameControl = lazy(() => import('../commpent/game/baseGame'))
-const Gamelist = lazy(() => import('../commpent/game/gameList'))
+const BaseGameControl = lazy(() => import('../commpent/game/base/baseGame'))
+const Gamelist = lazy(() => import('../commpent/game/base/gameList'))
+const GameDetail =lazy(()=>import('../page/user/admir/game/detail'))
 const router =[
   {
     path:'/login',
@@ -120,5 +121,13 @@ const router =[
       </Suspense>
     )
   },
+   {
+        path:'/admir/game/detail/:id',
+        element:(
+          <Suspense fallback={<div style={{display:'flex',justifyContent:'center',alignItems:'center'}}><Spin/></div>}>
+            <GameDetail/>
+          </Suspense>
+        )
+      },
 ]
 export default router

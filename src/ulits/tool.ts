@@ -29,3 +29,10 @@ export const getEmail = () => {
   return null
 }
 
+export const getId = () => {
+  const user = localStorage.getItem('user')
+  if(user){
+    return JSON.parse(user).state.id
+  }
+  return null
+}

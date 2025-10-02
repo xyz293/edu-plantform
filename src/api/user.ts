@@ -2,6 +2,7 @@ import request from '../ulits/reuqest'
 import type {Userinfo} from '../type/user/index'
 import {getusername,getEmail,getAvatar} from '../ulits/tool'
 import type {Logininfo} from '../type/user/index'
+import type {updateuser} from '../type/user/index'
 export const sendCode =(email:string) =>{  //3671263704
     return request.get('/user/sendCode',{params:{identifier:email}})
 }
@@ -37,4 +38,13 @@ export const getInfo = () =>{
     avatar,
     username
    }
+}
+
+export const updateInfo = (data:updateuser) =>{
+    return request.put('/user/update',{
+        id:data.id,
+        username:data.username,
+        nickname:data.nickname,
+        avatar:data.avatar
+    })
 }

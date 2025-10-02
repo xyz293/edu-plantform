@@ -1,7 +1,7 @@
 // TeamLists.tsx
-import { TeamList } from '../../api/team'
+import { TeamList } from '../../../api/team'
 import { useEffect, useState } from 'react'
-import type { Teamlist } from '../../type/Team/index'
+import type { Teamlist } from '../../../type/Team/index'
 import Member from './member'
 import { Button } from 'antd'
 

@@ -1,13 +1,14 @@
-import { ClassGameList } from '../../api/game'
-import { getClass } from '../../api/class'
+import { ClassGameList } from '../../../api/game'
+import { getClass } from '../../../api/class'
 import { useEffect, useState } from 'react'
-import type { Class } from '../../type/class/index'
+import type { Class } from '../../../type/class/index'
 import { Select } from 'antd'
-import type { GameList } from '../../type/game/index'
-
+import type { GameList } from '../../../type/game/index'
+import {useNavigate} from 'react-router-dom'
 const List = () => {
   const [classList, setClassList] = useState<Class[]>([])
   const [gameList, setGameList] = useState<GameList[]>([])
+  const navigate = useNavigate()
 
   useEffect(() => {
     getClass(1, 10, '').then((res) => {
@@ -52,6 +53,9 @@ const List = () => {
           gameList.map((item) => {
             return (
               <div
+              onClick={()=>{
+               navigate(`/admir/game/detail/${item.id}`)
+              }}
                 key={item.gmtCreate}
                 style={{
                   background: '#f0f9ff', // 浅蓝背景

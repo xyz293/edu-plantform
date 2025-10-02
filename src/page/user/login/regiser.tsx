@@ -2,7 +2,7 @@ import { Button, Input, Form,Select } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import {useState} from 'react'
 import type {Userinfo} from '../../../type/user/index'
-import {sendCode,regiser } from '../../../api/login'
+import {sendCode,regiser } from '../../../api/user'
 const Register = () => {
   const navigate = useNavigate();
   const [user,setUser] =useState<Userinfo | null>(null)

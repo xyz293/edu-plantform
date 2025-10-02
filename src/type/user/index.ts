@@ -13,3 +13,11 @@ export interface Logininfo{
     code?:string
     type:number
 }
+
+export interface updateuser{
+    id:number
+    username:string
+     nickname:string
+    avatar:string
+
+}

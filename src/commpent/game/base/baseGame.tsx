@@ -1,10 +1,10 @@
 import { useParams } from 'react-router-dom';
 import { Form, Input, Button, message } from 'antd';
-import type { Game } from '../../type/game/index';
-import { NewGame } from '../../api/game';
+import type { Game } from '../../../type/game/index';
+import { NewGame } from '../../../api/game';
 import { useState } from 'react';
 import Teamlist from './teamList'
-import type {Team } from '../../type/Team/index'
+import type {Team } from '../../../type/Team/index'
 const BaseGame = () => {
   const params = useParams();
   const id = params.id;

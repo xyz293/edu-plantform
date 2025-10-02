@@ -1,5 +1,5 @@
 // Member.tsx
-import type { TeamMember } from '../../type/Team/index'
+import type { TeamMember } from '../../../type/Team/index'
 
 const Member = ({ member }: { member: TeamMember[] }) => {
   return (

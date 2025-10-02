@@ -4,9 +4,10 @@ const { Header, Content, Sider } = Layout;
 import {Outlet,useNavigate} from 'react-router-dom'
 import {useEffect} from 'react'
 import {useLocation} from 'react-router-dom'
-
-import {getInfo} from '../../../api/login'
+import useStore from '../../../store/index'
+import {getInfo} from '../../../api/user'
 const App: React.FC = () => {
+  const {setToken} = useStore()
     const navigate = useNavigate()
     const location = useLocation()
     const info = getInfo()
@@ -31,6 +32,16 @@ const App: React.FC = () => {
   label:'用户管理',
   onClick: ()=>{
     navigate('/admir/user')
+  },
+  
+ },
+  {
+  key:'4',
+  label:'退出登录',
+  onClick: ()=>{
+    setToken('')
+    alert('已退出登录')
+    navigate('/login')
   },
   
  }

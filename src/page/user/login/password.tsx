@@ -1,6 +1,6 @@
 import { Button, Input, Form, Space } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import {login} from '../../../api/login'
+import {login} from '../../../api/user'
 import type {Logininfo} from '../../../type/user/index'
 import {useState} from 'react'
 import userStore from '../../../store/index'
