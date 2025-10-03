@@ -48,3 +48,15 @@ export interface gameRound{
     chessPhase:number
     chessRound:number
 }
+
+export interface Chess{
+    gameId:number
+    file:File
+}
+
+
+export interface GradeRanks{
+    teamId:number
+    teamName:string
+    thisRoundScore:number
+}

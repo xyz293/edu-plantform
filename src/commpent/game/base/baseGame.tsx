@@ -1,13 +1,15 @@
-import { useParams } from 'react-router-dom';
-import { Form, Input, Button, message } from 'antd';
+
+import { Form, Input, Button, message ,Select} from 'antd';
 import type { Game } from '../../../type/game/index';
 import { NewGame } from '../../../api/game';
-import { useState } from 'react';
+import {getClass} from '../../../api/class'
+import { useState,useEffect } from 'react';
 import Teamlist from './teamList'
+import type { Class } from '../../../type/class/index';
 import type {Team } from '../../../type/Team/index'
 const BaseGame = () => {
-  const params = useParams();
-  const id = params.id;
+
+  const [Class,setClass] = useState<Class[]>([])
    const [team,setTeam] = useState<Team>({
     gameId:0,
     studentNum:0,
@@ -19,7 +21,7 @@ const BaseGame = () => {
     teamNum: 0,
     studentNum: 0,
     perTeamNum: 0,
-    cid: Number(id),
+    cid: 0,
   });
 
   const [loading, setLoading] = useState(false);
@@ -30,12 +32,12 @@ const BaseGame = () => {
       return;
     }
 
-    const formData = new FormData();
+     const formData = new FormData();
     formData.append('file', game.file);
-    formData.append('teamNum', game.teamNum.toString());
-    formData.append('studentNum', game.studentNum.toString());
-    formData.append('teamMemberCount', game.perTeamNum.toString()); // 后端要求字段名
-    formData.append('cid', game.cid.toString());
+    formData.append('teamNum', String(game.teamNum));
+    formData.append('studentNum', String(game.studentNum));
+    formData.append('teamMemberCount', String(game.perTeamNum));
+    formData.append('cid', String(game.cid));
 
     setLoading(true);
     try {
@@ -54,11 +56,31 @@ const BaseGame = () => {
       setLoading(false);
     }
   };
+  useEffect(()=>{
+    getClass(1, 50, '').then((res) => {
+      if (res.data?.code === 200) {
+        console.log(res)
+        setClass(res.data.data?.list || [])
+      }
+    });
+  },[])
 
   return (
     <div style={{display:'flex',justifyContent:'space-between'}}>
      <div style={{width:'50%',display:'flex',justifyContent:'flex-start'}}>
          <Form layout="vertical">
+          <Form.Item>
+             <Select
+             onChange={(value) => setGame({ ...game, cid: Number(value) })}
+              style={{ width: '100%' }}
+              placeholder="请选择班级"
+              options={Class.map((item) => ({
+                label: item.classCode,
+                value: item.id,
+              }))}
+            />
+
+          </Form.Item>
         <Form.Item label="分组文件">
           <input
             type="file"

@@ -1,6 +1,6 @@
-import { OccupyStatus } from '../../../api/game'
+import { OccupyStatus ,init} from '../../../api/game'
 import { useEffect, useState } from 'react'
-
+import type {GameInit} from '../../../type/game/index'
 interface Tile {
   tileId: number
   type: 'blackSwamp' | 'blindBox' | 'fortress' | 'goldCenter' | 'opportunity' | 'normal'
@@ -15,8 +15,23 @@ const opportunityTiles = [22]
 
 const Occupy = ({ id }: { id: number }) => {
   const [tiles, setTiles] = useState<Tile[]>([])
+  const [gameInit,setGameInit] = useState<GameInit>({
+    gameId: id,
+  totalTiles: 0,
+  blackSwampTiles: blackSwampTiles,
+  blindBoxTiles: blindBoxTiles.map((tileId) => ({ tileId, eventType: 0 })),
+  fortressTiles: fortressTiles.map((tileId) => ({ tileId, gameType: 0 })),
+  goldCenterTiles: goldCenterTiles,
+  opportunityTiles: opportunityTiles
+  })
 
   useEffect(() => {
+    init(gameInit).then(res=>{
+      console.log('初始化游戏', res)
+      if(res.data.code===200){
+        alert('初始化游戏成功')
+      }
+    })
     OccupyStatus(id).then((res) => {
       console.log('占用状态', res)
 

@@ -1,10 +1,10 @@
 # Details
 
-Date : 2025-10-02 17:45:43
+Date : 2025-10-03 13:23:00
 
 Directory : ./src
 
-Total : 43 files,  2315 codes, 15 comments, 171 blanks, all 2501 lines, 0.64% comment rate
+Total : 43 files,  2078 codes, 15 comments, 170 blanks, all 2263 lines, 0.72% comment rate
 
 [summary](results.md)
 
@@ -13,7 +13,7 @@ Total : 43 files,  2315 codes, 15 comments, 171 blanks, all 2501 lines, 0.64% co
 | :--- | :--- | ---: | ---: | ---: | ---: | ---: |
 | [App.tsx](../src\App.tsx) | TypeScript JSX | 11 | 0 | 2 | 13 | 0.00% |
 | [api\class.ts](../src\api\class.ts) | TypeScript | 40 | 0 | 6 | 46 | 0.00% |
-| [api\game.ts](../src\api\game.ts) | TypeScript | 54 | 0 | 12 | 66 | 0.00% |
+| [api\game.ts](../src\api\game.ts) | TypeScript | 58 | 0 | 15 | 73 | 0.00% |
 | [api\team.ts](../src\api\team.ts) | TypeScript | 4 | 0 | 0 | 4 | 0.00% |
 | [api\user.ts](../src\api\user.ts) | TypeScript | 47 | 0 | 3 | 50 | 0.00% |
 | [assets\react.svg](../src\assets\react.svg) | XML | 1 | 0 | 0 | 1 | 0.00% |
@@ -26,16 +26,15 @@ Total : 43 files,  2315 codes, 15 comments, 171 blanks, all 2501 lines, 0.64% co
 | [commpent\game\base\member.tsx](../src\commpent\game\base\member.tsx) | TypeScript JSX | 34 | 1 | 2 | 37 | 2.86% |
 | [commpent\game\base\teamList.tsx](../src\commpent\game\base\teamList.tsx) | TypeScript JSX | 71 | 1 | 5 | 77 | 1.39% |
 | [commpent\game\detail\Occupy.tsx](../src\commpent\game\detail\Occupy.tsx) | TypeScript JSX | 104 | 1 | 13 | 118 | 0.95% |
+| [commpent\game\detail\UploadAssign.tsx](../src\commpent\game\detail\UploadAssign.tsx) | TypeScript JSX | 16 | 0 | 0 | 16 | 0.00% |
 | [commpent\game\detail\perosnRank.tsx](../src\commpent\game\detail\perosnRank.tsx) | TypeScript JSX | 24 | 0 | 0 | 24 | 0.00% |
 | [commpent\game\detail\teamRank.tsx](../src\commpent\game\detail\teamRank.tsx) | TypeScript JSX | 24 | 0 | 0 | 24 | 0.00% |
-| [commpent\game\detail\upload.tsx](../src\commpent\game\detail\upload.tsx) | TypeScript JSX | 22 | 0 | 5 | 27 | 0.00% |
+| [commpent\game\detail\upload.tsx](../src\commpent\game\detail\upload.tsx) | TypeScript JSX | 61 | 0 | 8 | 69 | 0.00% |
+| [hock\vircuallist.tsx](../src\hock\vircuallist.tsx) | TypeScript JSX | 7 | 0 | 2 | 9 | 0.00% |
 | [main.tsx](../src\main.tsx) | TypeScript JSX | 8 | 0 | 5 | 13 | 0.00% |
-| [page\admir\class\Detail.tsx](../src\page\admir\class\Detail.tsx) | TypeScript JSX | 148 | 0 | 7 | 155 | 0.00% |
-| [page\admir\class\index.tsx](../src\page\admir\class\index.tsx) | TypeScript JSX | 56 | 0 | 2 | 58 | 0.00% |
-| [page\admir\index.tsx](../src\page\admir\index.tsx) | TypeScript JSX | 124 | 0 | 9 | 133 | 0.00% |
 | [page\user\admir\class\Detail.tsx](../src\page\user\admir\class\Detail.tsx) | TypeScript JSX | 148 | 0 | 7 | 155 | 0.00% |
 | [page\user\admir\class\index.tsx](../src\page\user\admir\class\index.tsx) | TypeScript JSX | 56 | 0 | 2 | 58 | 0.00% |
-| [page\user\admir\game\detail.tsx](../src\page\user\admir\game\detail.tsx) | TypeScript JSX | 41 | 0 | 3 | 44 | 0.00% |
+| [page\user\admir\game\detail.tsx](../src\page\user\admir\game\detail.tsx) | TypeScript JSX | 54 | 0 | 11 | 65 | 0.00% |
 | [page\user\admir\game\index.tsx](../src\page\user\admir\game\index.tsx) | TypeScript JSX | 26 | 0 | 0 | 26 | 0.00% |
 | [page\user\admir\index.tsx](../src\page\user\admir\index.tsx) | TypeScript JSX | 135 | 0 | 9 | 144 | 0.00% |
 | [page\user\admir\user\index.tsx](../src\page\user\admir\user\index.tsx) | TypeScript JSX | 69 | 0 | 9 | 78 | 0.00% |
@@ -48,7 +47,8 @@ Total : 43 files,  2315 codes, 15 comments, 171 blanks, all 2501 lines, 0.64% co
 | [store\index.tsx](../src\store\index.tsx) | TypeScript JSX | 32 | 1 | 1 | 34 | 3.03% |
 | [type\Team\index.ts](../src\type\Team\index.ts) | TypeScript | 19 | 0 | 1 | 20 | 0.00% |
 | [type\class\index.ts](../src\type\class\index.ts) | TypeScript | 23 | 0 | 1 | 24 | 0.00% |
-| [type\game\index.ts](../src\type\game\index.ts) | TypeScript | 38 | 0 | 4 | 42 | 0.00% |
+| [type\game\index.ts](../src\type\game\index.ts) | TypeScript | 45 | 0 | 5 | 50 | 0.00% |
+| [type\hock\index.ts](../src\type\hock\index.ts) | TypeScript | 5 | 0 | 0 | 5 | 0.00% |
 | [type\user\index.ts](../src\type\user\index.ts) | TypeScript | 21 | 0 | 2 | 23 | 0.00% |
 | [ulits\config.ts](../src\ulits\config.ts) | TypeScript | 2 | 0 | 0 | 2 | 0.00% |
 | [ulits\reuqest.ts](../src\ulits\reuqest.ts) | TypeScript | 36 | 8 | 5 | 49 | 18.18% |

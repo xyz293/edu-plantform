@@ -1,6 +1,6 @@
 import request from '../ulits/reuqest'
 import type {GameInit} from '../type/game/index'
-export const NewGame = (formData: FormData) => {
+export const NewGame = (formData:FormData) => {
    return request.post('/game/upload', formData, {
     headers: { 'Content-Type': 'multipart/form-data' }
 })
