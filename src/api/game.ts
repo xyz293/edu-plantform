@@ -48,6 +48,7 @@ export const GameStatus = (id:number)=>{
 }
 
 export const GradeRank = (id:number)=>{
+    console.log(id)
     return request.get(`/game/xxt/rank/${id}`)
 }
 

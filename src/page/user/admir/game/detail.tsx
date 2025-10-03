@@ -1,4 +1,4 @@
-import { GameStatus, Unselected } from '../../../../api/game'
+import { GameStatus, Unselected,GradeRank } from '../../../../api/game'
 import { useEffect, useState } from 'react'
 import type { gameRound } from '../../../../type/game/index'
 import { useParams } from 'react-router-dom'
@@ -23,7 +23,8 @@ const GameDetail = () => {
   const [showPersonRank, setShowPersonRank] = useState(false)
 
   useEffect(() => {
-    Promise.all([GameStatus(id), Unselected(id)]).then(([statusRes]) => {
+    Promise.all([GameStatus(id), Unselected(id),GradeRank(id)]).then(([statusRes,unselectedRes,gradeRankRes]) => {
+      console.log(gradeRankRes)
       setRound(statusRes.data.data)
     })
   }, [id])
