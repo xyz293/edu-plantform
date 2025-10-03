@@ -22,10 +22,20 @@ const PersonRank = ({id}:{id:number})=>{
         <div ref={rankRef}  onScroll={Sroll} style={{height:'400px',overflow:'auto',position:'relative'}}>
          <div style={{height:50*rank.length}}>
             <div style={{position:'absolute',top:Startindex*50,left:0}}> 
+                <h3>个人积分排行榜</h3>
+                  <div style={{display:"flex",justifyContent:'space-between'}}>
+            <h4>排名</h4>
+             <h4>队伍ID</h4>
+             <h4>姓名</h4>
+             <h4>个人积分</h4>
+            </div>
                  {list.map((item)=>{
             return (
-                <div key={item.studentId} style={{height:'50px'}}>
-                    <p>{item.studentName} - {item.individualScore}</p>
+                <div key={item.studentId} style={{display:"flex",justifyContent:'space-between'}}>
+                  <p>第{rank.indexOf(item)+1}名</p>
+                       <p>第{item.teamId}组</p>
+                       <p>{item.studentName}</p>
+                       <p>{item.individualScore}</p>
                 </div>
             )
           })}

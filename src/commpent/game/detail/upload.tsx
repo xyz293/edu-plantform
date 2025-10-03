@@ -60,13 +60,13 @@ const UploadGrade = ({ id, Round, showUploadAssign, gradeRanks }: UploadGradePro
     },
     yAxis: {
       type: "category",
-      data: gradeRanks.map((item) => item.teamName),
+      data: gradeRanks?.map((item) => item.teamName || ''),
       inverse: true,
     },
     series: [
       {
         type: "bar",
-        data: gradeRanks.map((item) => item.thisRoundScore),
+        data: gradeRanks?.map((item) => item.thisRoundScore),
         label: {
           show: true,
           position: "right",
@@ -103,13 +103,22 @@ const UploadGrade = ({ id, Round, showUploadAssign, gradeRanks }: UploadGradePro
             <Button type="primary" onClick={() => showUploadAssign(true)}>
               上传分配
             </Button>
-            <div style={{ width: "100%", height: 500 }}>
-              <ReactECharts option={option} style={{ width: "100%", height: "100%" }} />
-            </div>
+            <div style={{ width: "100%", height: 700 }}>
+  <ReactECharts option={option} style={{ width: "100%", height: "100%" }} />
+</div>
+
           </div>
         )
-      case 2:
-        return <Text type="warning">走棋阶段</Text>
+        case 2:
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+            <Text type="warning">走棋阶段</Text>
+            <div style={{ width: "100%", height: 700 }}>
+  <ReactECharts option={option} style={{ width: "100%", height: "100%" }} />
+</div>
+</div>
+)
+      
       case 3:
         return <Text type="secondary">游戏结束</Text>
     }
@@ -122,7 +131,7 @@ const UploadGrade = ({ id, Round, showUploadAssign, gradeRanks }: UploadGradePro
       borderRadius: 8,
       background: '#ffffff'
     }}>
-      <h3 style={{ marginBottom: 12 }}>游戏状态</h3>
+      <h3 style={{ marginBottom: 12 }}>游戏赛段：棋盘赛</h3>
       <Text>棋盘赛轮次：{Round.chessRound}</Text>
       <div style={{ marginTop: 16 }}>{renderPhase()}</div>
     </div>

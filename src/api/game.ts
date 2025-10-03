@@ -70,3 +70,11 @@ export const Uploadchess =(formdata:FormData)=>{
 export const Unselected = (id:number)=>{
     return request.get(`/game/unselected/${id}`)
 }
+
+
+export const Assign = (gameid:number,teamAssignCount:Record<number,number>)=>{
+    return request.post('/game/upload/assign',{
+        gameId:gameid,
+        teamAssignCount,
+    })
+}
