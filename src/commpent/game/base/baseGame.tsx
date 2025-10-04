@@ -5,9 +5,12 @@ import { NewGame } from '../../../api/game';
 import {getClass} from '../../../api/class'
 import { useState,useEffect } from 'react';
 import Teamlist from './teamList'
+
+import {useNavigate} from 'react-router-dom'
 import type { Class } from '../../../type/class/index';
 import type {Team } from '../../../type/Team/index'
 const BaseGame = () => {
+  const navigate = useNavigate()
 
   const [Class,setClass] = useState<Class[]>([])
    const [team,setTeam] = useState<Team>({
@@ -15,6 +18,7 @@ const BaseGame = () => {
     studentNum:0,
     teamNum:0,
    })
+   const [isshow,setIsshow] = useState<boolean>(false)
    
   const [game, setGame] = useState<Game>({
     file: null, // 初始不要用 new File([], '')
@@ -43,11 +47,14 @@ const BaseGame = () => {
     try {
       const res = await NewGame(formData); // 确保 NewGame 内部 axios.post 不手动设置 Content-Type
       console.log('上传成功', res);
-      setTeam({
+     if(res.data.code===200){
+      setIsshow(true)
+       setTeam({
         gameId:Number(res.data.data.gameId),
         studentNum:Number(res.data.data.studentNum),
         teamNum:Number(res.data.data.teamNum),
       })
+     }
       message.success('上传成功！');
     } catch (err) {
       console.error('上传失败', err);
@@ -124,9 +131,12 @@ const BaseGame = () => {
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" onClick={handleUpload} loading={loading}>
+         <div style={{display:'flex',justifyContent:'center',alignItems:'center',gap:'20px'}}>
+           <Button type="primary" onClick={handleUpload} loading={loading}>
             提交数据
           </Button>
+          {isshow===true&& <Button type="primary" onClick={()=>navigate(`/admir/game/detail/${team.gameId}`)}>进入游戏</Button>}
+         </div>
         </Form.Item>
       </Form>
      </div>

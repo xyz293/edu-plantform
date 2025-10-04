@@ -1,4 +1,4 @@
-import { Uploadchess } from '../../../api/game'
+import { Uploadchess,GameStatus } from '../../../api/game'
 import type { gameRound, Chess, GradeRanks } from '../../../type/game/index'
 import { Button, Typography, message } from 'antd'
 import { useState } from 'react'
@@ -11,13 +11,15 @@ interface UploadGradeProps {
   Round: gameRound
   showUploadAssign: (showUploadAssign: boolean) => void
   gradeRanks: GradeRanks[]
+  setIsUpload: (isUpload: boolean) => void
 }
 
-const UploadGrade = ({ id, Round, showUploadAssign, gradeRanks }: UploadGradeProps) => {
+const UploadGrade = ({ id, Round, showUploadAssign, gradeRanks,setIsUpload }: UploadGradeProps) => {
   const [data, setData] = useState<Chess>({
     file: null,
     gameId: id,
   });
+  console.log(Round.chessPhase)
 
   const handleUpload = () => {
     if (!data.file) {
@@ -30,7 +32,13 @@ const UploadGrade = ({ id, Round, showUploadAssign, gradeRanks }: UploadGradePro
 
     Uploadchess(formData)
       .then((res) => {
+        console.log(res)
         if (res.data.code === 200) {
+           GameStatus(id).then((res)=>{
+            if(res.data.code===200){
+              setIsUpload(true)
+            }
+          })
           message.success('上传成功')
         } else {
           message.error(res.data.message || '上传失败')

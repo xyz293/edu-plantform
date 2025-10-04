@@ -81,7 +81,8 @@ const Occupy = ({ id ,Round}: { id: number ,Round:gameRound}) => {
 
       setTiles(allTiles)
     })
-  }, [id,Round.chessPhase])
+  }, [Round.chessPhase
+])
 
   const getColor = (tile: Tile) => {
     if (tile.occupied) return '#ff6b6b' // 占用高亮红

@@ -12,7 +12,7 @@ import UploadAssign from '../../../../commpent/game/detail/UploadAssign'
 const GameDetail = () => {
   const params = useParams()
   const id = Number(params.id)
-
+  const [isUpload,setIsUpload]= useState<boolean>(false)
   const [gradeRanks, setGradeRanks] = useState<GradeRanks[]>([])
   const [showUploadAssign, setShowUploadAssign] = useState(false)
   const [Round, setRound] = useState<gameRound>({
@@ -25,12 +25,13 @@ const GameDetail = () => {
   const [showPersonRank, setShowPersonRank] = useState(false)
 
   useEffect(() => {
+    console.log(Round.chessPhase)
     Promise.all([GameStatus(id), GradeRank(id)]).then(([statusRes, rankRes]) => {
       console.log(statusRes, rankRes)
-      setRound(statusRes.data.data)
+      setRound(statusRes.data.data)  //上传之后进行给出数值
       setGradeRanks(rankRes.data.data)
     })
-  }, [id])
+  }, [isUpload,showUploadAssign])  //必须通过useState里面的方法改变才行，不能只是执行函数 ，否则不会改变
 
   return (
     <div
@@ -77,6 +78,7 @@ const GameDetail = () => {
       >
         <UploadGrade
           id={id}
+          setIsUpload={setIsUpload}
           Round={Round}
           showUploadAssign={setShowUploadAssign}
           gradeRanks={gradeRanks}
