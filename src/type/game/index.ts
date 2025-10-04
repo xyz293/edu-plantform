@@ -74,15 +74,17 @@ export interface Unselect{
 }
 
 
+// ... existing code ...
+
 export interface Occupy{
-   gameId: number;               // 游戏ID
-    teamId: number;               // 队伍ID
-    tileIds: number[];            // 要占领的格子ID数组
-    triggerBlindBox: boolean;     // 是否触发盲盒格子事件
-    blindBoxTileIds: number[];    // 触发的盲盒格子ID
-    triggerGoldCenter: boolean;   // 是否触发金币中心事件
-    goldCenterTileId: number;     // 触发的金币中心格子ID
-    triggerChanceLand: boolean;   // 是否触发机会格子事件
-    chanceLandTileId: number;     // 触发的机会格子ID
-    challengeSuccess: boolean;    // 占领挑战是否成功
+    gameId: number;
+    teamId: number | null; // 允许为 null，表示未选择队伍
+    tileIds: number[];
+    triggerBlindBox: boolean;
+    blindBoxTileIds: number[];
+    triggerGoldCenter: boolean;
+    goldCenterTileId: number;
+    triggerChanceLand: boolean;
+    chanceLandTileId: number;
+    challengeSuccess: boolean;
 }

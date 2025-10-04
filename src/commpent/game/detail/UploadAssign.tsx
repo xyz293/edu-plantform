@@ -1,6 +1,6 @@
 import {Form,Input,Button} from 'antd'
 import type {GradeRanks} from '../../../type/game/index'
-import {Assign,GameStatus } from '../../../api/game'
+import {Assign } from '../../../api/game'
 import {useState} from 'react'
 const UploadAssign = ({gradeRanks,setShowUploadAssign,id}:{gradeRanks:GradeRanks[],setShowUploadAssign:(showUploadAssign: boolean) => void,id:number}) => {
     const [teamAssignCount,setTeamAssignCount] = useState<Record<number,number>[]>([])

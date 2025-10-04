@@ -1,5 +1,6 @@
 import request from '../ulits/reuqest'
 import type {GameInit} from '../type/game/index'
+import type {Occupy} from '../type/game/index'
 export const NewGame = (formData:FormData) => {
    return request.post('/game/upload', formData, {
     headers: { 'Content-Type': 'multipart/form-data' }
@@ -77,4 +78,15 @@ export const Assign = (gameid:number,teamAssignCount:Record<number,number>)=>{
         gameId:gameid,
         teamAssignCount,
     })
+}
+
+
+export const OccupyState = (id:number)=>{
+    return request.get(`/game/occupyStatus/${id}`)
+}
+
+
+export const StudentOccupy = (data:Occupy)=>{
+    console.log(data.gameId)
+    return request.post('/game/tile/occupy',data)
 }

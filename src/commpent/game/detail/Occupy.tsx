@@ -1,16 +1,17 @@
-import { OccupyStatus ,init } from '../../../api/game'
+import { OccupyStatus, init} from '../../../api/game'
 import { useEffect, useState } from 'react'
 import type { GameInit } from '../../../type/game/index'
-import {Unselected } from '../../../api/game'
-import type {Unselect} from '../../../type/game/index'
-import type {gameRound} from '../../../type/game/index'
+import type { gameRound } from '../../../type/game/index'
 import { Button } from 'antd'
-import type {Occupy} from '../../../type/game/index'
+import type { Occupy, Unselect } from '../../../type/game/index'
+import OccupyStates from './OccupyState'
+import {useRef} from 'react'
 interface Tile {
   tileId: number
   type: 'blackSwamp' | 'blindBox' | 'fortress' | 'goldCenter' | 'opportunity' | 'normal'
   occupied?: boolean
   displayNumber?: number | null
+  teamId?: number | null // 添加队伍ID，用于显示哪个队伍占用了这个格子
 }
 
 const blackSwampTiles = [35, 53, 58, 120, 137, 138, 140, 141, 144, 157, 161, 191, 250, 257]
@@ -19,19 +20,12 @@ const fortressTiles = [224, 56, 51, 219]
 const goldCenterTiles = [139]
 const opportunityTiles = [22]
 
-const Occupy = ({ id ,Round}: { id: number ,Round:gameRound}) => {
+const Occupy = ({ id, Round }: { id: number, Round: gameRound }) => {
   const [tiles, setTiles] = useState<Tile[]>([])
-  const [unselected, setUnselected] = useState<Unselect[]>([])
-  const [occupy, setOccupy] = useState<Occupy[]>([])
-  const [index,setIndex] = useState<number>(0)
+  const tileRef = useRef<any>(null);
+  
   useEffect(() => {
     // 初始化游戏
-    if(Round.chessPhase===2){
-    Unselected(id).then(res=>{
-      console.log('未占用', res)
-      setUnselected(res.data.data)
-    })
-  }
     const gameInit: GameInit = {
       gameId: id,
       totalTiles: 0,
@@ -42,9 +36,9 @@ const Occupy = ({ id ,Round}: { id: number ,Round:gameRound}) => {
       opportunityTiles: opportunityTiles
     }
 
-    init(gameInit).then(res=>{
+    init(gameInit).then(res => {
       console.log('初始化游戏', res)
-      if(res.data.code===200){
+      if (res.data.code === 200) {
         alert('初始化游戏成功')
       }
     })
@@ -61,7 +55,8 @@ const Occupy = ({ id ,Round}: { id: number ,Round:gameRound}) => {
             tileId,
             type,
             occupied: false,
-            displayNumber: null
+            displayNumber: null,
+            teamId: null
           })
         })
       }
@@ -75,90 +70,155 @@ const Occupy = ({ id ,Round}: { id: number ,Round:gameRound}) => {
       // 普通格子
       for (let i = 1; i <= 260; i++) {
         if (!allTiles.find(t => t.tileId === i)) {
-          allTiles.push({ tileId: i, type: 'normal', displayNumber: null })
+          allTiles.push({ 
+            tileId: i, 
+            type: 'normal', 
+            displayNumber: null,
+            occupied: false,
+            teamId: null
+          })
         }
       }
 
       setTiles(allTiles)
     })
-  }, [Round.chessPhase
-])
+  }, [Round.chessPhase])
 
+  // 获取格子颜色
   const getColor = (tile: Tile) => {
-    if (tile.occupied) return '#ff6b6b' // 占用高亮红
+    if (tile.occupied) return 'linear-gradient(45deg, #ff6b6b, #ff0000)' // 占用高亮渐变红
     switch (tile.type) {
-      case 'blackSwamp': return '#1e1e1e'
-      case 'blindBox': return '#ffcc00'
-      case 'fortress': return '#ff6600'
-      case 'goldCenter': return '#ffd700'
-      case 'opportunity': return '#0ccb12'
-      default: return '#8c8c8c'
+      case 'blackSwamp': return 'linear-gradient(45deg, #2e2e2e, #505050)' // 深黑渐变
+      case 'blindBox': return 'linear-gradient(45deg, #f7b500, #f1c232)' // 黄色渐变
+      case 'fortress': return 'linear-gradient(45deg, #d36f23, #ff6600)' // 橙色渐变
+      case 'goldCenter': return 'linear-gradient(45deg, #f1c232, #ffd700)' // 金色渐变
+      case 'opportunity': return 'linear-gradient(45deg, #35e35e, #0ccb12)' // 绿色渐变
+      default: return 'linear-gradient(45deg, #b0b0b0, #8c8c8c)' // 默认灰色渐变
     }
   }
 
-  const handleClick = (tileId: number) => {
+  const handleTileClick = (tileId: number) => {
+    if (!tileRef.current?.unselected || tileRef.current?.unselected.length === 0) {
+      alert('暂无队伍可占用格子');
+      return;
+    }
+
+    const currentTeam = tileRef.current.unselected[tileRef.current.index];
+    if (!currentTeam || currentTeam.assignCount <= 0) {
+      alert('该组已无格子可占用');
+      return;
+    }
+
+    // 检查格子是否已被占用
+    const tile = tiles.find(t => t.tileId === tileId);
+    if (tile?.occupied) {
+      alert('该格子已被占用');
+      return;
+    }
+
+    // 检查是否已经在当前占用列表中
+    const isAlreadySelected = tileRef.current.occupy?.tileIds?.includes(tileId);
+    if (isAlreadySelected) {
+      alert('该格子已在选择列表中');
+      return;
+    }
+
+    // 添加到占用列表
+    tileRef.current.setOccupy((prev: Occupy) => ({
+      ...prev,
+      tileIds: [...prev.tileIds, tileId],
+    }));
+
+    // 更新未占用数量
+    tileRef.current.setUnselected((prev: Unselect[]) => 
+      prev.map((item, idx) => 
+        idx === tileRef.current.index 
+          ? { ...item, assignCount: item.assignCount - 1 }
+          : item
+      )
+    );
+
+    // 更新格子显示状态
     setTiles(prev =>
       prev.map(tile => {
         if (tile.tileId === tileId) {
-          // 生成随机数字，例如 1-100
-          const randomNum = Math.floor(Math.random() * 100) + 1
-          return { ...tile, displayNumber: randomNum, occupied: true }
+          const randomNum = Math.floor(Math.random() * 100) + 1;
+          return { 
+            ...tile, 
+            displayNumber: randomNum, 
+            occupied: true,
+            teamId: currentTeam.teamId
+          };
         }
-        return tile
+        return tile;
       })
-    )
-  }
-
+    );
+  };
+  
   return (
     <div>
-      <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
-        {unselected.length===0?'':<h1>当前有{unselected[index].teamId}组有{unselected[index].assignCount}个格子未被占用</h1>}
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '20px' }}>
+        {tileRef.current?.unselected && tileRef.current?.unselected.length > 0 && tileRef.current?.index < tileRef.current?.unselected.length ? (
+          <h2 style={{ color: '#1890ff', margin: 0 }}>
+            当前第{tileRef.current.unselected[tileRef.current.index].teamId}组有{tileRef.current.unselected[tileRef.current.index].assignCount}个格子未被占用
+          </h2>
+        ) : (
+          <h2 style={{ color: '#52c41a', margin: 0 }}>
+            所有队伍格子分配完成
+          </h2>
+        )}
       </div>
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(20, 35px)',
-        gap: '4px',
-        padding: '10px',
-        background: '#f5f5f5',
-        borderRadius: '10px',
-        boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
-      }}
-    >
+
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(20, 35px)',
+          gap: '4px',
+          padding: '10px',
+          background: '#f5f5f5',
+          borderRadius: '10px',
+          boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+          marginBottom: '20px'
+        }}
+      >
+        {tiles.map(tile => (
+          <div
+            key={tile.tileId}
+            title={`格子${tile.tileId} - 类型: ${tile.type}${tile.occupied ? ` - 被队伍${tile.teamId}占用` : ''}`}
+            style={{
+              width: '35px',
+              height: '35px',
+              borderRadius: '8px',
+              background: getColor(tile),
+              border: tile.occupied ? '2px solid #ff4d4f' : '1px solid #ccc',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              color: '#fff',
+              fontWeight: 500,
+              fontSize: '12px',
+              cursor: tile.occupied ? 'not-allowed' : 'pointer',
+              transition: 'transform 0.2s',
+              opacity: tile.occupied ? 0.8 : 1,
+            }}
+            onClick={() => !tile.occupied && handleTileClick(tile.tileId)}
+            onMouseEnter={e => {
+              if (!tile.occupied) {
+                e.currentTarget.style.transform = 'scale(1.2)';
+              }
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.transform = 'scale(1)';
+            }}
+          >
+            {tile.displayNumber ?? ''}
+          </div>
+        ))}
+      </div>
       
-      {tiles.map(tile => (
-        <div
-          key={tile.tileId}
-          title={`格子类型: ${tile.type}`}
-          style={{
-            width: '35px',
-            height: '35px',
-            borderRadius: '8px',
-            backgroundColor: getColor(tile),
-            border: '1px solid #ccc',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            color: '#fff',
-            fontWeight: 500,
-            fontSize: '12px',
-            cursor: 'pointer',
-            transition: 'transform 0.2s',
-          }}
-          onClick={() => handleClick(tile.tileId)}
-          onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.2)'}
-          onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
-        >
-          {tile.displayNumber ?? ''} {/* 初始为空，点击后显示随机数字 */}
-        </div>
-      ))}
-    </div>
-    <div style={{padding:'20px',display:'flex',justifyContent:'center',alignItems:'center',gap:'20px'}}>
-      <Button size='large' type='default'> 取消占用</Button>
-      <Button size='large' type='primary' onClick={()=>{
-       
-      }}>提交占用</Button>
-    </div>
+      <div>
+        {Round.chessPhase === 2 && <OccupyStates ref={tileRef} id={id} />}
+      </div>
     </div>
   )
 }

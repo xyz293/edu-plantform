@@ -23,14 +23,17 @@ const GameDetail = () => {
     chessRound: 0,
   })
   const [showPersonRank, setShowPersonRank] = useState(false)
-
-  useEffect(() => {
-    console.log(Round.chessPhase)
-    Promise.all([GameStatus(id), GradeRank(id)]).then(([statusRes, rankRes]) => {
+  const show =async ()=>{
+     Promise.all([GameStatus(id), GradeRank(id)]).then(([statusRes, rankRes]) => {
       console.log(statusRes, rankRes)
       setRound(statusRes.data.data)  //上传之后进行给出数值
       setGradeRanks(rankRes.data.data)
     })
+  }
+
+  useEffect(() => {
+    console.log(Round.chessPhase)
+    show()
   }, [isUpload,showUploadAssign])  //必须通过useState里面的方法改变才行，不能只是执行函数 ，否则不会改变
 
   return (
@@ -82,6 +85,7 @@ const GameDetail = () => {
           Round={Round}
           showUploadAssign={setShowUploadAssign}
           gradeRanks={gradeRanks}
+          show={show}
         />
       </Card>
 

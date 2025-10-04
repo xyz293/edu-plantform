@@ -12,9 +12,10 @@ interface UploadGradeProps {
   showUploadAssign: (showUploadAssign: boolean) => void
   gradeRanks: GradeRanks[]
   setIsUpload: (isUpload: boolean) => void
+  show: () => void
 }
 
-const UploadGrade = ({ id, Round, showUploadAssign, gradeRanks,setIsUpload }: UploadGradeProps) => {
+const UploadGrade = ({ id, Round, showUploadAssign, gradeRanks,setIsUpload ,show}: UploadGradeProps) => {
   const [data, setData] = useState<Chess>({
     file: null,
     gameId: id,
@@ -120,7 +121,12 @@ const UploadGrade = ({ id, Round, showUploadAssign, gradeRanks,setIsUpload }: Up
         case 2:
         return (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-            <Text type="warning">走棋阶段</Text>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: 16 }}>
+              <Text type="warning">走棋阶段</Text>
+              <Button type="primary"size='small' onClick={show}>
+            下一阶段
+          </Button>
+            </div>
             <div style={{ width: "100%", height: 700 }}>
   <ReactECharts option={option} style={{ width: "100%", height: "100%" }} />
 </div>
@@ -128,7 +134,12 @@ const UploadGrade = ({ id, Round, showUploadAssign, gradeRanks,setIsUpload }: Up
 )
       
       case 3:
-        return <Text type="secondary">游戏结束</Text>
+        return <div style={{ display: 'flex', justifyContent: 'center', gap: 16 }}>
+          <Text type="secondary">游戏结束</Text>
+          <Button type="primary"size='small' onClick={show}>
+            下一阶段
+          </Button>
+        </div>
     }
   }
 
