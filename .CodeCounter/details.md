@@ -1,10 +1,10 @@
 # Details
 
-Date : 2025-10-04 22:40:55
+Date : 2025-10-05 16:40:44
 
 Directory : ./src
 
-Total : 44 files,  2565 codes, 31 comments, 217 blanks, all 2813 lines, 1.19% comment rate
+Total : 44 files,  2580 codes, 31 comments, 220 blanks, all 2831 lines, 1.19% comment rate
 
 [summary](results.md)
 
@@ -25,17 +25,17 @@ Total : 44 files,  2565 codes, 31 comments, 217 blanks, all 2813 lines, 1.19% co
 | [commpent\game\base\gameList.tsx](../src\commpent\game\base\gameList.tsx) | TypeScript JSX | 85 | 1 | 5 | 91 | 1.16% |
 | [commpent\game\base\member.tsx](../src\commpent\game\base\member.tsx) | TypeScript JSX | 34 | 1 | 2 | 37 | 2.86% |
 | [commpent\game\base\teamList.tsx](../src\commpent\game\base\teamList.tsx) | TypeScript JSX | 71 | 1 | 5 | 77 | 1.39% |
-| [commpent\game\detail\Occupy.tsx](../src\commpent\game\detail\Occupy.tsx) | TypeScript JSX | 195 | 9 | 22 | 226 | 4.41% |
-| [commpent\game\detail\OccupyState.tsx](../src\commpent\game\detail\OccupyState.tsx) | TypeScript JSX | 136 | 7 | 15 | 158 | 4.90% |
+| [commpent\game\detail\Occupy.tsx](../src\commpent\game\detail\Occupy.tsx) | TypeScript JSX | 196 | 9 | 22 | 227 | 4.39% |
+| [commpent\game\detail\OccupyState.tsx](../src\commpent\game\detail\OccupyState.tsx) | TypeScript JSX | 141 | 7 | 13 | 161 | 4.73% |
 | [commpent\game\detail\UploadAssign.tsx](../src\commpent\game\detail\UploadAssign.tsx) | TypeScript JSX | 41 | 0 | 1 | 42 | 0.00% |
-| [commpent\game\detail\perosnRank.tsx](../src\commpent\game\detail\perosnRank.tsx) | TypeScript JSX | 46 | 0 | 2 | 48 | 0.00% |
-| [commpent\game\detail\teamRank.tsx](../src\commpent\game\detail\teamRank.tsx) | TypeScript JSX | 34 | 0 | 0 | 34 | 0.00% |
+| [commpent\game\detail\perosnRank.tsx](../src\commpent\game\detail\perosnRank.tsx) | TypeScript JSX | 38 | 0 | 4 | 42 | 0.00% |
+| [commpent\game\detail\teamRank.tsx](../src\commpent\game\detail\teamRank.tsx) | TypeScript JSX | 25 | 0 | 3 | 28 | 0.00% |
 | [commpent\game\detail\upload.tsx](../src\commpent\game\detail\upload.tsx) | TypeScript JSX | 149 | 0 | 12 | 161 | 0.00% |
 | [hock\vircuallist.tsx](../src\hock\vircuallist.tsx) | TypeScript JSX | 7 | 0 | 2 | 9 | 0.00% |
 | [main.tsx](../src\main.tsx) | TypeScript JSX | 8 | 0 | 5 | 13 | 0.00% |
 | [page\user\admir\class\Detail.tsx](../src\page\user\admir\class\Detail.tsx) | TypeScript JSX | 148 | 0 | 7 | 155 | 0.00% |
 | [page\user\admir\class\index.tsx](../src\page\user\admir\class\index.tsx) | TypeScript JSX | 56 | 0 | 2 | 58 | 0.00% |
-| [page\user\admir\game\detail.tsx](../src\page\user\admir\game\detail.tsx) | TypeScript JSX | 98 | 0 | 8 | 106 | 0.00% |
+| [page\user\admir\game\detail.tsx](../src\page\user\admir\game\detail.tsx) | TypeScript JSX | 118 | 0 | 7 | 125 | 0.00% |
 | [page\user\admir\game\index.tsx](../src\page\user\admir\game\index.tsx) | TypeScript JSX | 26 | 0 | 0 | 26 | 0.00% |
 | [page\user\admir\index.tsx](../src\page\user\admir\index.tsx) | TypeScript JSX | 135 | 0 | 9 | 144 | 0.00% |
 | [page\user\admir\user\index.tsx](../src\page\user\admir\user\index.tsx) | TypeScript JSX | 69 | 0 | 9 | 78 | 0.00% |
@@ -48,12 +48,12 @@ Total : 44 files,  2565 codes, 31 comments, 217 blanks, all 2813 lines, 1.19% co
 | [store\index.tsx](../src\store\index.tsx) | TypeScript JSX | 32 | 1 | 1 | 34 | 3.03% |
 | [type\Team\index.ts](../src\type\Team\index.ts) | TypeScript | 19 | 0 | 1 | 20 | 0.00% |
 | [type\class\index.ts](../src\type\class\index.ts) | TypeScript | 23 | 0 | 1 | 24 | 0.00% |
-| [type\game\index.ts](../src\type\game\index.ts) | TypeScript | 74 | 1 | 15 | 90 | 1.33% |
+| [type\game\index.ts](../src\type\game\index.ts) | TypeScript | 77 | 1 | 15 | 93 | 1.28% |
 | [type\hock\index.ts](../src\type\hock\index.ts) | TypeScript | 5 | 0 | 0 | 5 | 0.00% |
 | [type\user\index.ts](../src\type\user\index.ts) | TypeScript | 21 | 0 | 2 | 23 | 0.00% |
 | [ulits\config.ts](../src\ulits\config.ts) | TypeScript | 2 | 0 | 0 | 2 | 0.00% |
 | [ulits\reuqest.ts](../src\ulits\reuqest.ts) | TypeScript | 36 | 8 | 5 | 49 | 18.18% |
-| [ulits\tool.ts](../src\ulits\tool.ts) | TypeScript | 35 | 0 | 4 | 39 | 0.00% |
+| [ulits\tool.ts](../src\ulits\tool.ts) | TypeScript | 38 | 0 | 5 | 43 | 0.00% |
 | [vite-env.d.ts](../src\vite-env.d.ts) | TypeScript | 0 | 1 | 1 | 2 | 100.00% |
 
 [summary](results.md)

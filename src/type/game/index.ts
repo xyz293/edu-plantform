@@ -91,3 +91,10 @@ export interface Occupy{
 export interface game{
     getRank : (id:number)=>void
 }
+
+
+export interface ReOutTeam{
+    gameId: number;
+     teamIds: number[]
+     type:number
+}

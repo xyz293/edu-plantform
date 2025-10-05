@@ -10,11 +10,13 @@ import UploadGrade from '../../../../commpent/game/detail/upload'
 import PersonRank from '../../../../commpent/game/detail/perosnRank'
 import TeamRank from '../../../../commpent/game/detail/teamRank'
 import Occupy from '../../../../commpent/game/detail/Occupy'
+import {useNavigate} from 'react-router-dom'
 import UploadAssign from '../../../../commpent/game/detail/UploadAssign'
 import type {StudentRanks} from '../../../../type/game/index'
 import type {TeamRanks} from '../../../../type/game/index'
 const GameDetail = () => {
   const params = useParams()
+  const navigate = useNavigate()
   const id = Number(params.id)
   const [isUpload,setIsUpload]= useState<boolean>(false)
   const [gradeRanks, setGradeRanks] = useState<GradeRanks[]>([])
@@ -49,9 +51,12 @@ const GameDetail = () => {
 
   useEffect(() => {
     console.log(Round.chessPhase)
+    if(Round.stage===2){
+        navigate(`/proposal/${id}`)
+    }
     show()
     getRank()
-  }, [isUpload,showUploadAssign])  //必须通过useState里面的方法改变才行，不能只是执行函数 ，否则不会改变
+  }, [isUpload,showUploadAssign,Round.stage])  //必须通过useState里面的方法改变才行，不能只是执行函数 ，否则不会改变
 
   return (
     <useData.Provider value={{getRank}}>

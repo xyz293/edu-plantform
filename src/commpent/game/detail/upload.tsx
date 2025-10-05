@@ -3,7 +3,7 @@ import type { gameRound, Chess, GradeRanks } from '../../../type/game/index'
 import { Button, Typography, message } from 'antd'
 import { useState } from 'react'
 import ReactECharts from "echarts-for-react";
-
+import {useNavigate} from 'react-router-dom'
 const { Text } = Typography
 
 interface UploadGradeProps {
@@ -16,6 +16,7 @@ interface UploadGradeProps {
 }
 
 const UploadGrade = ({ id, Round, showUploadAssign, gradeRanks,setIsUpload ,show}: UploadGradeProps) => {
+  const navigate = useNavigate()
   const [data, setData] = useState<Chess>({
     file: null,
     gameId: id,
@@ -35,11 +36,7 @@ const UploadGrade = ({ id, Round, showUploadAssign, gradeRanks,setIsUpload ,show
       .then((res) => {
         console.log(res)
         if (res.data.code === 200) {
-           GameStatus(id).then((res)=>{
-            if(res.data.code===200){
-              setIsUpload(true)
-            }
-          })
+           setIsUpload(true)
           message.success('上传成功')
         } else {
           message.error(res.data.message || '上传失败')
@@ -123,7 +120,11 @@ const UploadGrade = ({ id, Round, showUploadAssign, gradeRanks,setIsUpload ,show
           <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             <div style={{ display: 'flex', justifyContent: 'center', gap: 16 }}>
               <Text type="warning">走棋阶段</Text>
-              <Button type="primary"size='small' onClick={show}>
+              <Button type="primary"size='small' onClick={()=>{
+                  GameStatus(id).then((res)=>{
+                    console.log(res)
+                  })
+                }}>
             下一阶段
           </Button>
             </div>
@@ -131,12 +132,20 @@ const UploadGrade = ({ id, Round, showUploadAssign, gradeRanks,setIsUpload ,show
   <ReactECharts option={option} style={{ width: "100%", height: "100%" }} />
 </div>
 </div>
-)
+) 
       
       case 3:
         return <div style={{ display: 'flex', justifyContent: 'center', gap: 16 }}>
-          <Text type="secondary">游戏结束</Text>
-          <Button type="primary"size='small' onClick={show}>
+          <Text type="secondary">游戏结束 </Text>
+          <Button type="primary"size='small' onClick={()=>{
+                  GameStatus(id).then((res)=>{
+                    console.log(res)
+                  })
+                  if(Round.stage===2){
+                    navigate(`/proposal/${id}`)
+                  }
+          }
+        }>
             下一阶段
           </Button>
         </div>

@@ -16,6 +16,7 @@ const BaseUser = lazy(() => import('../page/user/admir/user/index'))
 const BaseGameControl = lazy(() => import('../commpent/game/base/baseGame'))
 const Gamelist = lazy(() => import('../commpent/game/base/gameList'))
 const GameDetail =lazy(()=>import('../page/user/admir/game/detail'))
+const BaesProposal =lazy(()=>import('../commpent/proposal/base/base'))
 const router =[
   {
     path:'/login',
@@ -42,6 +43,14 @@ const router =[
         )
       }
     ]
+  },
+  {
+    path:'/proposal/:id',
+    element:(
+      <Suspense fallback={<div style={{display:'flex',justifyContent:'center',alignItems:'center'}}><Spin/></div>}>
+        <BaesProposal/>
+      </Suspense>
+    )
   },
   {
     path:'/admir',
