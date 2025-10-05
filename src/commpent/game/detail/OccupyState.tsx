@@ -5,13 +5,15 @@ import { StudentOccupy } from '../../../api/game';
 import type { Unselect } from '../../../type/game/index';
 import type { Occupy } from '../../../type/game/index';
 import { useImperativeHandle, forwardRef } from 'react';
-
+import {useContext} from 'react'
+import {useData} from '../../../ulits/tool'
 interface Props {
   id: number;
 }
 
 const OccupyState = forwardRef(({ id }: Props, ref) => {
   const [unselected, setUnselected] = useState<Unselect[]>([]);
+  const getRank = useContext(useData)
   const [index, setIndex] = useState<number>(0);
   const [occupy, setOccupy] = useState<Occupy>({
     gameId: Number(id),
@@ -69,11 +71,12 @@ const OccupyState = forwardRef(({ id }: Props, ref) => {
       alert('请至少选择一个格子');
       return;
     }
-
+    console.log('当前占用状态', occupy);
     const res = await StudentOccupy(occupy);
     console.log(res);
 
     if (res.data.code === 200) {
+      getRank?.getRank(id)
       alert('占用成功');
       // 更新未占用数量
       setUnselected(prev => prev.map((item, idx) => 

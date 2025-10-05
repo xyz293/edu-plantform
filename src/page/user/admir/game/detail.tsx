@@ -1,20 +1,26 @@
-import { GameStatus, GradeRank } from '../../../../api/game'
+import { GameStatus, GradeRank,OccupyStatus } from '../../../../api/game'
 import { useEffect, useState } from 'react'
 import type { gameRound, GradeRanks } from '../../../../type/game/index'
 import { useParams } from 'react-router-dom'
 import { Button, Modal, Card } from 'antd'
+import {StudentRank} from './../../../../api/game'
+import {useData} from '../../../../ulits/tool'
+import {GameRank} from '../../../../api/game'
 import UploadGrade from '../../../../commpent/game/detail/upload'
 import PersonRank from '../../../../commpent/game/detail/perosnRank'
 import TeamRank from '../../../../commpent/game/detail/teamRank'
 import Occupy from '../../../../commpent/game/detail/Occupy'
 import UploadAssign from '../../../../commpent/game/detail/UploadAssign'
-
+import type {StudentRanks} from '../../../../type/game/index'
+import type {TeamRanks} from '../../../../type/game/index'
 const GameDetail = () => {
   const params = useParams()
   const id = Number(params.id)
   const [isUpload,setIsUpload]= useState<boolean>(false)
   const [gradeRanks, setGradeRanks] = useState<GradeRanks[]>([])
   const [showUploadAssign, setShowUploadAssign] = useState(false)
+  const [srank,setStudentRank] = useState<StudentRanks[]>([])
+  const [trank,setTeamRank] = useState<TeamRanks[]>([])
   const [Round, setRound] = useState<gameRound>({
     proposalRound: 0,
     proposalStage: 0,
@@ -22,10 +28,20 @@ const GameDetail = () => {
     chessPhase: 0,
     chessRound: 0,
   })
+   const getRank = async ()=>{
+    const res = await StudentRank(id)
+    const res1 = await GameRank(id)
+    if(res.data.code === 200){
+      setStudentRank(res.data.data)
+    }
+    if(res1.data.code === 200){
+      setTeamRank(res1.data.data)
+    }
+  }
   const [showPersonRank, setShowPersonRank] = useState(false)
   const show =async ()=>{
-     Promise.all([GameStatus(id), GradeRank(id)]).then(([statusRes, rankRes]) => {
-      console.log(statusRes, rankRes)
+     Promise.all([GameStatus(id), GradeRank(id),OccupyStatus(id)]).then(([statusRes, rankRes,occupyRes]) => {
+      console.log(statusRes, rankRes,occupyRes)
       setRound(statusRes.data.data)  //上传之后进行给出数值
       setGradeRanks(rankRes.data.data)
     })
@@ -34,10 +50,12 @@ const GameDetail = () => {
   useEffect(() => {
     console.log(Round.chessPhase)
     show()
+    getRank()
   }, [isUpload,showUploadAssign])  //必须通过useState里面的方法改变才行，不能只是执行函数 ，否则不会改变
 
   return (
-    <div
+    <useData.Provider value={{getRank}}>
+        <div
       style={{
         display: 'grid',
         gridTemplateColumns: '1fr 2fr 1.3fr',
@@ -61,7 +79,7 @@ const GameDetail = () => {
           {showPersonRank ? '切换到队伍排名' : '切换到个人排名'}
         </Button>
         <div style={{ marginTop: 16 }}>
-          {showPersonRank ? <PersonRank id={id} /> : <TeamRank id={id} />}
+          {showPersonRank ? <PersonRank srank={srank} /> : <TeamRank trank={trank} />}
         </div>
       </Card>
 
@@ -99,6 +117,7 @@ const GameDetail = () => {
         <UploadAssign  gradeRanks={gradeRanks}  setShowUploadAssign={setShowUploadAssign} id={id} />
       </Modal>
     </div>
+    </useData.Provider>
   )
 }
 

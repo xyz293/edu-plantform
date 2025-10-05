@@ -28,7 +28,7 @@ const Occupy = ({ id, Round }: { id: number, Round: gameRound }) => {
     // 初始化游戏
     const gameInit: GameInit = {
       gameId: id,
-      totalTiles: 0,
+      totalTiles: 285,
       blackSwampTiles: blackSwampTiles,
       blindBoxTiles: blindBoxTiles.map(tileId => ({ tileId, eventType: 0 })),
       fortressTiles: fortressTiles.map(tileId => ({ tileId, gameType: 0 })),
@@ -153,6 +153,7 @@ const Occupy = ({ id, Round }: { id: number, Round: gameRound }) => {
         return tile;
       })
     );
+    console.log('当前占用列表', tileRef.current.occupy);
   };
   
   return (

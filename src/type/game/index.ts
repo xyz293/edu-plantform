@@ -88,3 +88,6 @@ export interface Occupy{
     chanceLandTileId: number;
     challengeSuccess: boolean;
 }
+export interface game{
+    getRank : (id:number)=>void
+}

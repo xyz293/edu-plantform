@@ -1,3 +1,5 @@
+import {createContext} from 'react'
+import type {game} from '../type/game/index'
 export const getToken = () => {
   const user = localStorage.getItem('user')
   if(user){
@@ -36,3 +38,5 @@ export const getId = () => {
   }
   return null
 }
+
+export const useData = createContext<game |null>(null)
