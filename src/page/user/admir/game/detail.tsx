@@ -20,6 +20,7 @@ const GameDetail = () => {
   const id = Number(params.id)
   console.log(id)
   const [isUpload,setIsUpload]= useState<boolean>(false)
+  const [tranks,setTrank] = useState<boolean>(false)
   const [gradeRanks, setGradeRanks] = useState<GradeRanks[]>([])
   const [showUploadAssign, setShowUploadAssign] = useState(false)
   const [srank,setStudentRank] = useState<StudentRanks[]>([])
@@ -57,7 +58,7 @@ const GameDetail = () => {
     }
     show()
     getRank()
-  }, [isUpload,showUploadAssign,Round.stage])  //必须通过useState里面的方法改变才行，不能只是执行函数 ，否则不会改变
+  }, [isUpload,showUploadAssign,Round.stage,tranks])  //必须通过useState里面的方法改变才行，不能只是执行函数 ，否则不会改变
 
   return (
     <useData.Provider value={{getRank}}>
@@ -85,7 +86,7 @@ const GameDetail = () => {
           {showPersonRank ? '切换到队伍排名' : '切换到个人排名'}
         </Button>
         <div style={{ marginTop: 16 }}>
-          {showPersonRank ? <PersonRank srank={srank} id={id} /> : <TeamRank trank={trank} />}
+          {showPersonRank ? <PersonRank srank={srank} id={id} setTrank={setTrank} tranks={tranks}/> : <TeamRank trank={trank} />}
         </div>
       </Card>
 

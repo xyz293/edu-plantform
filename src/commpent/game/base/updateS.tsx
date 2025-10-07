@@ -2,7 +2,7 @@ import {update} from '../../../api/game'
 import type {UpdateScore} from '../../../type/game/index'
 import {Form,Input,Button} from 'antd'
 import {useState} from 'react'
-const Update =({id,index,setIsshow}:{id:number,index:number,setIsshow:(isshow:boolean)=>void})=>{
+const Update =({id,index,setIsshow,setTrank,tranks}:{id:number,index:number,setIsshow:(isshow:boolean)=>void,setTrank:(trank:boolean)=>void,tranks:boolean})=>{
    console.log(id)
     const [user,setUser] = useState<UpdateScore>({
         type: 2, // 1为小组 2为个人
@@ -16,6 +16,8 @@ const Update =({id,index,setIsshow}:{id:number,index:number,setIsshow:(isshow:bo
         const res = await update(user)
         console.log(res)
         if(res.data.code === 200){
+           setTrank(!tranks)
+            alert(res.data.message)
             setIsshow(false)
         }
         else{

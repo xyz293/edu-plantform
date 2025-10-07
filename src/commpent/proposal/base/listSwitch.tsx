@@ -8,17 +8,18 @@ interface Props{
 }
 const ListSwitch =({id}:Props)=>{
     const [srank,setSrank] = useState<StudentRanks[]>([])
+    const [tranks,setTrank] = useState<boolean>(false)
     useEffect(()=>{
       Promise.all([StudentRank(id)]).then(([studentRank])=>{
        console.log(studentRank)
        setSrank(studentRank.data.data)
       })
-    },[id])
+    },[id,tranks])
     const [index,setIndex] = useState<number>(1)
     const show =()=>{
         switch(index){
             case 1:
-                return <Personlist srank={srank} id={id} />  //一会使用usecontext去传入变量
+                return <Personlist srank={srank} id={id} setTrank={setTrank} tranks={tranks}/>  //一会使用usecontext去传入变量
             case 0:
                 return <div></div>
         }

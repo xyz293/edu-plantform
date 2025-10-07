@@ -3,7 +3,7 @@ import {useState,useRef} from 'react'
 import type {StudentRanks} from '../../../type/game/index'
 import UpdateScore from '../base/updateS'
 import {Modal} from 'antd'
-const PersonRank = ({srank,id}:{srank:StudentRanks[],id:number})=>{
+const PersonRank = ({srank,id,setTrank,tranks}:{srank:StudentRanks[],id:number,setTrank:(trank:boolean)=>void,tranks:boolean})=>{
     console.log(id)
     const rankRef = useRef<HTMLDivElement>(null)
     const [isshow,setIsshow] = useState<boolean>(false)
@@ -33,7 +33,7 @@ const PersonRank = ({srank,id}:{srank:StudentRanks[],id:number})=>{
              onCancel={()=>{setIsshow(false)}}
               footer={null}
              >
-            <UpdateScore id={id} index={index} setIsshow={setIsshow}/>
+            <UpdateScore id={id} index={index} setIsshow={setIsshow} setTrank={setTrank} tranks={tranks}/>
             </Modal>
                  {list.map((item)=>{
             return (
