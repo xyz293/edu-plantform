@@ -1,13 +1,13 @@
-Date : 2025-10-05 16:40:44
+Date : 2025-10-05 22:56:48
 Directory : ./src
-Total : 44 files,  2580 codes, 31 comments, 220 blanks, all 2831 lines, 1.19% comment rate
+Total : 47 files,  2742 codes, 31 comments, 236 blanks, all 3009 lines, 1.12% comment rate
 
 Languages
 +----------------+------------+------------+------------+------------+------------+--------------+
 | language       | files      | code       | comment    | blank      | total      | comment rate |
 +----------------+------------+------------+------------+------------+------------+--------------+
-| TypeScript JSX |         30 |      2,195 |         21 |        161 |      2,377 |        0.95% |
-| TypeScript     |         13 |        384 |         10 |         59 |        453 |        2.54% |
+| TypeScript JSX |         33 |      2,336 |         21 |        172 |      2,529 |        0.89% |
+| TypeScript     |         13 |        405 |         10 |         64 |        479 |        2.41% |
 | XML            |          1 |          1 |          0 |          0 |          1 |        0.00% |
 +----------------+------------+------------+------------+------------+------------+--------------+
 
@@ -15,29 +15,31 @@ Directories
 +---------------------------------------+------------+------------+------------+------------+------------+--------------+
 | path                                  | files      | code       | comment    | blank      | total      | comment rate |
 +---------------------------------------+------------+------------+------------+------------+------------+--------------+
-| .                                     |         44 |      2,580 |         31 |        220 |      2,831 |        1.19% |
-| commpent                              |         14 |      1,149 |         20 |        104 |      1,273 |        1.71% |
-| commpent\game                         |         10 |        915 |         19 |         83 |      1,017 |        2.03% |
-| page\user                             |         10 |        837 |          0 |         46 |        883 |        0.00% |
-| page                                  |         10 |        837 |          0 |         46 |        883 |        0.00% |
-| commpent\game\detail                  |          6 |        590 |         16 |         55 |        661 |        2.64% |
-| page\user\admir                       |          6 |        552 |          0 |         34 |        586 |        0.00% |
+| .                                     |         47 |      2,742 |         31 |        236 |      3,009 |        1.12% |
+| commpent                              |         17 |      1,276 |         20 |        115 |      1,411 |        1.54% |
+| commpent\game                         |         10 |        925 |         19 |         82 |      1,026 |        2.01% |
+| page\user                             |         10 |        842 |          0 |         46 |        888 |        0.00% |
+| page                                  |         10 |        842 |          0 |         46 |        888 |        0.00% |
+| commpent\game\detail                  |          6 |        600 |         16 |         54 |        670 |        2.60% |
+| page\user\admir                       |          6 |        557 |          0 |         34 |        591 |        0.00% |
 | commpent\game\base                    |          4 |        325 |          3 |         28 |        356 |        0.91% |
 | page\user\login                       |          4 |        285 |          0 |         12 |        297 |        0.00% |
 | commpent\class                        |          4 |        234 |          1 |         21 |        256 |        0.43% |
 | page\user\admir\class                 |          2 |        204 |          0 |          9 |        213 |        0.00% |
-| api                                   |          4 |        163 |          0 |         29 |        192 |        0.00% |
-| router                                |          2 |        151 |          0 |          1 |        152 |        0.00% |
-| type                                  |          5 |        145 |          1 |         19 |        165 |        0.68% |
-| page\user\admir\game                  |          2 |        144 |          0 |          7 |        151 |        0.00% |
-| type\game                             |          1 |         77 |          1 |         15 |         93 |        1.28% |
+| api                                   |          4 |        179 |          0 |         32 |        211 |        0.00% |
+| router                                |          2 |        160 |          0 |          1 |        161 |        0.00% |
+| type                                  |          5 |        150 |          1 |         21 |        172 |        0.66% |
+| page\user\admir\game                  |          2 |        149 |          0 |          7 |        156 |        0.00% |
+| commpent\proposal\base                |          3 |        117 |          0 |         12 |        129 |        0.00% |
+| commpent\proposal                     |          3 |        117 |          0 |         12 |        129 |        0.00% |
+| type\game                             |          1 |         82 |          1 |         17 |        100 |        1.20% |
 | ulits                                 |          3 |         76 |          8 |         10 |         94 |        9.52% |
 | page\user\admir\user                  |          1 |         69 |          0 |          9 |         78 |        0.00% |
 | store                                 |          1 |         32 |          1 |          1 |         34 |        3.03% |
 | type\class                            |          1 |         23 |          0 |          1 |         24 |        0.00% |
 | type\user                             |          1 |         21 |          0 |          2 |         23 |        0.00% |
-| type\Team                             |          1 |         19 |          0 |          1 |         20 |        0.00% |
 | router\guard                          |          1 |         19 |          0 |          0 |         19 |        0.00% |
+| type\Team                             |          1 |         19 |          0 |          1 |         20 |        0.00% |
 | hock                                  |          1 |          7 |          0 |          2 |          9 |        0.00% |
 | type\hock                             |          1 |          5 |          0 |          0 |          5 |        0.00% |
 | assets                                |          1 |          1 |          0 |          0 |          1 |        0.00% |
@@ -49,7 +51,7 @@ Files
 +---------------------------------------+----------------+------------+------------+------------+------------+--------------+
 | App.tsx                               | TypeScript JSX |         11 |          0 |          2 |         13 |        0.00% |
 | api\class.ts                          | TypeScript     |         40 |          0 |          6 |         46 |        0.00% |
-| api\game.ts                           | TypeScript     |         72 |          0 |         20 |         92 |        0.00% |
+| api\game.ts                           | TypeScript     |         88 |          0 |         23 |        111 |        0.00% |
 | api\team.ts                           | TypeScript     |          4 |          0 |          0 |          4 |        0.00% |
 | api\user.ts                           | TypeScript     |         47 |          0 |          3 |         50 |        0.00% |
 | assets\react.svg                      | XML            |          1 |          0 |          0 |          1 |        0.00% |
@@ -66,12 +68,15 @@ Files
 | commpent\game\detail\UploadAssign.tsx | TypeScript JSX |         41 |          0 |          1 |         42 |        0.00% |
 | commpent\game\detail\perosnRank.tsx   | TypeScript JSX |         38 |          0 |          4 |         42 |        0.00% |
 | commpent\game\detail\teamRank.tsx     | TypeScript JSX |         25 |          0 |          3 |         28 |        0.00% |
-| commpent\game\detail\upload.tsx       | TypeScript JSX |        149 |          0 |         12 |        161 |        0.00% |
+| commpent\game\detail\upload.tsx       | TypeScript JSX |        159 |          0 |         11 |        170 |        0.00% |
+| commpent\proposal\base\base.tsx       | TypeScript JSX |         30 |          0 |          3 |         33 |        0.00% |
+| commpent\proposal\base\store.tsx      | TypeScript JSX |         20 |          0 |          1 |         21 |        0.00% |
+| commpent\proposal\base\teamlist.tsx   | TypeScript JSX |         67 |          0 |          8 |         75 |        0.00% |
 | hock\vircuallist.tsx                  | TypeScript JSX |          7 |          0 |          2 |          9 |        0.00% |
 | main.tsx                              | TypeScript JSX |          8 |          0 |          5 |         13 |        0.00% |
 | page\user\admir\class\Detail.tsx      | TypeScript JSX |        148 |          0 |          7 |        155 |        0.00% |
 | page\user\admir\class\index.tsx       | TypeScript JSX |         56 |          0 |          2 |         58 |        0.00% |
-| page\user\admir\game\detail.tsx       | TypeScript JSX |        118 |          0 |          7 |        125 |        0.00% |
+| page\user\admir\game\detail.tsx       | TypeScript JSX |        123 |          0 |          7 |        130 |        0.00% |
 | page\user\admir\game\index.tsx        | TypeScript JSX |         26 |          0 |          0 |         26 |        0.00% |
 | page\user\admir\index.tsx             | TypeScript JSX |        135 |          0 |          9 |        144 |        0.00% |
 | page\user\admir\user\index.tsx        | TypeScript JSX |         69 |          0 |          9 |         78 |        0.00% |
@@ -80,16 +85,16 @@ Files
 | page\user\login\password.tsx          | TypeScript JSX |         84 |          0 |          5 |         89 |        0.00% |
 | page\user\login\regiser.tsx           | TypeScript JSX |         98 |          0 |          3 |        101 |        0.00% |
 | router\guard\index.tsx                | TypeScript JSX |         19 |          0 |          0 |         19 |        0.00% |
-| router\index.tsx                      | TypeScript JSX |        132 |          0 |          1 |        133 |        0.00% |
+| router\index.tsx                      | TypeScript JSX |        141 |          0 |          1 |        142 |        0.00% |
 | store\index.tsx                       | TypeScript JSX |         32 |          1 |          1 |         34 |        3.03% |
 | type\Team\index.ts                    | TypeScript     |         19 |          0 |          1 |         20 |        0.00% |
 | type\class\index.ts                   | TypeScript     |         23 |          0 |          1 |         24 |        0.00% |
-| type\game\index.ts                    | TypeScript     |         77 |          1 |         15 |         93 |        1.28% |
+| type\game\index.ts                    | TypeScript     |         82 |          1 |         17 |        100 |        1.20% |
 | type\hock\index.ts                    | TypeScript     |          5 |          0 |          0 |          5 |        0.00% |
 | type\user\index.ts                    | TypeScript     |         21 |          0 |          2 |         23 |        0.00% |
 | ulits\config.ts                       | TypeScript     |          2 |          0 |          0 |          2 |        0.00% |
 | ulits\reuqest.ts                      | TypeScript     |         36 |          8 |          5 |         49 |       18.18% |
 | ulits\tool.ts                         | TypeScript     |         38 |          0 |          5 |         43 |        0.00% |
 | vite-env.d.ts                         | TypeScript     |          0 |          1 |          1 |          2 |      100.00% |
-| Total                                 |                |      2,580 |         31 |        220 |      2,831 |        1.19% |
+| Total                                 |                |      2,742 |         31 |        236 |      3,009 |        1.12% |
 +---------------------------------------+----------------+------------+------------+------------+------------+--------------+

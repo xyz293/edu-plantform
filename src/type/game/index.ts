@@ -98,3 +98,12 @@ export interface ReOutTeam{
      teamIds: number[]
      type:number
 }
+
+export interface UpdateScore{
+    type: number;
+      stage: number;
+      id: number;
+      gameId: number;
+      num: number;
+      comment: string;
+}

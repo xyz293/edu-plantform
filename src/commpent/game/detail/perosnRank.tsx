@@ -1,10 +1,15 @@
 
 import {useState,useRef} from 'react'
 import type {StudentRanks} from '../../../type/game/index'
-const PersonRank = ({srank}:{srank:StudentRanks[]})=>{
+import UpdateScore from '../base/updateS'
+import {Modal} from 'antd'
+const PersonRank = ({srank,id}:{srank:StudentRanks[],id:number})=>{
+    console.log(id)
     const rankRef = useRef<HTMLDivElement>(null)
+    const [isshow,setIsshow] = useState<boolean>(false)
     const [Startindex,setIndex] = useState<number>(0)
-    
+  
+    const [index,setsIndex] = useState<number>(0)
     const Sroll = ()=>{
         if(rankRef.current){
             setIndex(Math.floor(rankRef.current.scrollTop / 50))
@@ -23,9 +28,19 @@ const PersonRank = ({srank}:{srank:StudentRanks[]})=>{
              <h4>姓名</h4>
              <h4>个人积分</h4>
             </div>
+            <Modal
+             open={isshow} 
+             onCancel={()=>{setIsshow(false)}}
+              footer={null}
+             >
+            <UpdateScore id={id} index={index} setIsshow={setIsshow}/>
+            </Modal>
                  {list.map((item)=>{
             return (
-                <div key={item.studentId} style={{display:"flex",justifyContent:'space-between'}}>
+                <div key={item.studentId} style={{display:"flex",justifyContent:'space-between'}} onClick={()=>{
+                         setIsshow(true)
+                         setsIndex(item.studentId)
+                }}>
                   <p>第{srank.indexOf(item)+1}名</p>
                        <p>第{item.teamId}组</p>
                        <p>{item.studentName}</p>

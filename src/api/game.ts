@@ -2,6 +2,7 @@ import request from '../ulits/reuqest'
 import type {GameInit} from '../type/game/index'
 import type {Occupy} from '../type/game/index'
 import type {ReOutTeam} from '../type/game/index'
+import type {UpdateScore} from '../type/game/index'
 export const NewGame = (formData:FormData) => {
    return request.post('/game/upload', formData, {
     headers: { 'Content-Type': 'multipart/form-data' }
@@ -107,5 +108,26 @@ export const ProTeam =(id:number)=>{
         params:{
             gameId:id,
         }
+    })
+}
+
+export const ProposalList =(id:number)=>{
+    return request.get('/proposal/init/list',{
+        params:{
+           gameId:id,
+           sort:1,
+        }
+    })
+}
+
+export const update =(data:UpdateScore)=>{
+    console.log(data)
+    return request.post('/game/score/update',{
+        type: data.type,        // 必须传，1=小组，2=个人
+    stage: data.stage,      // 必须传，比赛阶段
+    id: data.id,            // 小组ID 或 学生ID
+    gameId: data.gameId,    // 比赛ID
+    num: data.num,          // 分数变动
+    comment: data.comment   // 备注/评语
     })
 }

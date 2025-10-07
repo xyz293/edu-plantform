@@ -1,0 +1,44 @@
+import {update} from '../../../api/game'
+import type {UpdateScore} from '../../../type/game/index'
+import {Form,Input,Button} from 'antd'
+import {useState} from 'react'
+const Update =({id,index,setIsshow}:{id:number,index:number,setIsshow:(isshow:boolean)=>void})=>{
+   console.log(id)
+    const [user,setUser] = useState<UpdateScore>({
+        type: 2, // 1为小组 2为个人
+        stage: 1, // 1为初赛 2为复赛
+        id: Number(index), // 个人为学生id 小组为小组id
+        gameId: Number(id),
+        num: 0, // 学生成绩
+        comment: '',  // 评语
+    })
+    const onSubmit = async ()=>{
+        const res = await update(user)
+        console.log(res)
+        if(res.data.code === 200){
+            setIsshow(false)
+        }
+        else{
+            alert(res.data.msg)
+        }
+    }
+    return (
+        <div>
+           <Form>
+             <Form.Item label="填入成绩" >
+                <Input value={user.num} onChange={(e)=>setUser({...user,num:Number(e.target.value)})}/>
+             </Form.Item>
+             <Form.Item label="填入评语">
+                <Input value={user.comment} onChange={(e)=>setUser({...user,comment:e.target.value})}/>
+             </Form.Item>
+             <Form.Item>
+              <div style={{display:'flex',justifyContent:'center',gap:'20px'}}>
+                 <Button onClick={onSubmit}>更新</Button>
+               <Button>取消</Button>
+              </div>
+             </Form.Item>
+           </Form>
+        </div>
+    )
+}
+export default Update

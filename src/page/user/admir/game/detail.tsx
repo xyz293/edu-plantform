@@ -18,6 +18,7 @@ const GameDetail = () => {
   const params = useParams()
   const navigate = useNavigate()
   const id = Number(params.id)
+  console.log(id)
   const [isUpload,setIsUpload]= useState<boolean>(false)
   const [gradeRanks, setGradeRanks] = useState<GradeRanks[]>([])
   const [showUploadAssign, setShowUploadAssign] = useState(false)
@@ -84,7 +85,7 @@ const GameDetail = () => {
           {showPersonRank ? '切换到队伍排名' : '切换到个人排名'}
         </Button>
         <div style={{ marginTop: 16 }}>
-          {showPersonRank ? <PersonRank srank={srank} /> : <TeamRank trank={trank} />}
+          {showPersonRank ? <PersonRank srank={srank} id={id} /> : <TeamRank trank={trank} />}
         </div>
       </Card>
 
