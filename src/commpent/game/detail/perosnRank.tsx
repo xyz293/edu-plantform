@@ -8,7 +8,8 @@ const PersonRank = ({srank,id,setTrank,tranks}:{srank:StudentRanks[],id:number,s
     const rankRef = useRef<HTMLDivElement>(null)
     const [isshow,setIsshow] = useState<boolean>(false)
     const [Startindex,setIndex] = useState<number>(0)
-  
+   const type = 2
+   const stage = 1
     const [index,setsIndex] = useState<number>(0)
     const Sroll = ()=>{
         if(rankRef.current){
@@ -33,7 +34,7 @@ const PersonRank = ({srank,id,setTrank,tranks}:{srank:StudentRanks[],id:number,s
              onCancel={()=>{setIsshow(false)}}
               footer={null}
              >
-            <UpdateScore id={id} index={index} setIsshow={setIsshow} setTrank={setTrank} tranks={tranks}/>
+            <UpdateScore id={id} index={index} setIsshow={setIsshow} setTrank={setTrank} tranks={tranks} type={type} stage={stage}/>
             </Modal>
                  {list.map((item)=>{
             return (

@@ -2,11 +2,20 @@ import {update} from '../../../api/game'
 import type {UpdateScore} from '../../../type/game/index'
 import {Form,Input,Button} from 'antd'
 import {useState} from 'react'
-const Update =({id,index,setIsshow,setTrank,tranks}:{id:number,index:number,setIsshow:(isshow:boolean)=>void,setTrank:(trank:boolean)=>void,tranks:boolean})=>{
+interface UpdateProps{
+    id:number,
+    index:number,
+    setIsshow:(isshow:boolean)=>void,
+    setTrank:(trank:boolean)=>void,
+    tranks:boolean,
+    type:number
+    stage:number
+}
+const Update =({id,index,setIsshow,setTrank,tranks,type,stage}:UpdateProps)=>{
    console.log(id)
     const [user,setUser] = useState<UpdateScore>({
-        type: 2, // 1为小组 2为个人
-        stage: 1, // 1为初赛 2为复赛
+        type: type, // 1为小组 2为个人
+        stage: stage, // 1为个人 2为小组
         id: Number(index), // 个人为学生id 小组为小组id
         gameId: Number(id),
         num: 0, // 学生成绩
@@ -36,7 +45,7 @@ const Update =({id,index,setIsshow,setTrank,tranks}:{id:number,index:number,setI
              <Form.Item>
               <div style={{display:'flex',justifyContent:'center',gap:'20px'}}>
                  <Button onClick={onSubmit}>更新</Button>
-               <Button>取消</Button>
+                 <Button onClick={()=>setIsshow(false)}>取消</Button>
               </div>
              </Form.Item>
            </Form>

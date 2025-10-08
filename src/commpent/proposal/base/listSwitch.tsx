@@ -3,6 +3,7 @@ import {StudentRank} from '../../../api/game'
 import Personlist from '../../../commpent/game/detail/perosnRank'
 import {useEffect, useState} from 'react'
 import type {StudentRanks} from '../../../type/game/index'
+import TeamRank from './teamRank'
 interface Props{
   id:number
 }
@@ -21,7 +22,7 @@ const ListSwitch =({id}:Props)=>{
             case 1:
                 return <Personlist srank={srank} id={id} setTrank={setTrank} tranks={tranks}/>  //一会使用usecontext去传入变量
             case 0:
-                return <div></div>
+                return <TeamRank id={id} />
         }
     }
 

@@ -6,7 +6,9 @@ import type { TeamRanks } from "../../../type/game";
 import TeamList from "./teamlist";
 import Store from "./store";
 import ListSwitch from "./listSwitch";
-
+import {GameStatus,ProposalList} from '../../../api/game'
+import type {gameRound} from '../../../type/game/index'
+import SelectTeam from "./selectTeam";
 const { Title } = Typography;
 
 const BaseProposal = () => {
@@ -15,13 +17,22 @@ const BaseProposal = () => {
   const id = Number(params.id);
 
   const [teamRanks, setTeamRanks] = useState<TeamRanks[]>([]);
+  const [gameStatus,setGameStatus]=useState<gameRound|null>(null)
   const [isDel, setIsDel] = useState<boolean>(false);
   const [isshow,setIsshow]=useState<boolean>(false);
-  useEffect(() => {
-    Promise.all([GameRank(id)]).then(([gameRank]) => {
+  const [list,setList]=useState<number[]>([])
+  const show = ()=>{
+     Promise.all([GameRank(id),GameStatus(id),ProposalList(id)]).then(([gameRank,gameStatus,proposalList]) => {
       console.log("🏆 GameRank =>", gameRank);
+      console.log("🏆 GameStatus =>", gameStatus);
+      console.log("🏆 ProposalList =>", proposalList);
+      setList(proposalList.data.data)
       setTeamRanks(gameRank.data.data);
+      setGameStatus(gameStatus.data.data)
     });
+  }
+  useEffect(() => {
+    show()
   }, [id, isDel]);
 
   return (
@@ -79,7 +90,7 @@ const BaseProposal = () => {
         
           style={{ flex: 1, boxShadow: "0 2px 8px rgba(0,0,0,0.1)" }}
         >
-          <TeamList teamRanks={teamRanks} id={id} setIsDel={setIsDel} isDel={isDel} />
+          <TeamList teamRanks={teamRanks} id={id} setIsDel={setIsDel} isDel={isDel} gameStatus={gameStatus} />
         </Card>
 
         {/* 商店或资源面板 */}
@@ -88,7 +99,8 @@ const BaseProposal = () => {
           
           style={{ flex: 1, boxShadow: "0 2px 8px rgba(0,0,0,0.1)" }}
         >
-          <Store teamRanks={teamRanks} id={id} />
+        {gameStatus?.proposalStage===1? <SelectTeam    list={list}   teamRanks={teamRanks}/> :<Store teamRanks={teamRanks} id={id} />}
+        
         </Card>
       </div>
     </div>

@@ -3,24 +3,27 @@ import { Button } from 'antd'
 import { useState, useRef } from 'react'
 import type { ReOutTeam } from '../../../type/game/index'
 import { ReOutTeams } from '../../../api/game'
+import type {gameRound} from '../../../type/game/index'
 
 const TeamList = ({
   teamRanks,
   id,
   setIsDel,
   isDel,
+  gameStatus
 }: {
   teamRanks: TeamRanks[]
   id: number
   setIsDel: (isDel: boolean) => void
   isDel: boolean
+  gameStatus:gameRound|null
 }) => {
   const [outTeam, setOutTeam] = useState<ReOutTeam>({
     gameId: Number(id),
     teamIds: [],
     type: 0, // 2为淘汰
   })
-
+  console.log(gameStatus)
   const scrollRef = useRef<HTMLDivElement>(null)
   const [index, setIndex] = useState<number>(0)
 
@@ -74,7 +77,7 @@ const TeamList = ({
         <div>组号</div>
         <div>姓名</div>
         <div>积分</div>
-        <div>操作</div>
+       {(gameStatus?.proposalStage != 1) && <div>操作</div>}
       </div>
 
       {/* 滚动列表 */}
@@ -116,6 +119,7 @@ const TeamList = ({
                 <div>第{item.teamId}组</div>
                 <div>{item.leaderName}</div>
                 <div>{item.totalScore}分</div>
+               {(gameStatus?.proposalStage != 1) && 
                 <Button
                   type={item.status === 1 ? 'primary' : 'default'}
                   size="small"
@@ -126,6 +130,7 @@ const TeamList = ({
                 >
                   {item.status === 1 ? '删除' : '恢复'}
                 </Button>
+               }
               </div>
             ))}
           </div>
