@@ -47,6 +47,9 @@ export interface gameRound{
     stage:number
     chessPhase:number
     chessRound:number
+    studentCount:number
+    teamCount:number
+    teamMemberCount:number
 }
 
 export interface Chess{
