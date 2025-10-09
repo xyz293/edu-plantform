@@ -40,3 +40,16 @@ export const getId = () => {
 }
 
 export const useData = createContext<game |null>(null)
+
+export function splitThree(n: number): [number, number, number] {
+    const base = Math.floor(n / 3)
+    const remainder = n % 3
+
+    const result = [base, base, base]
+
+    for (let i = 0; i < remainder; i++) {
+        result[i] += 1
+    }
+
+    return result as [number, number, number]
+}

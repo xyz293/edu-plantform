@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState ,useMemo} from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Button, Card, Space, Typography, Divider,Modal } from "antd";
 import { GameRank } from "../../../api/game";
@@ -16,12 +16,18 @@ const BaseProposal = () => {
   const navigate = useNavigate();
   const id = Number(params.id);
 
-  const [teamRanks, setTeamRanks] = useState<TeamRanks[]>([]);
+ const [teamRanks, setTeamRanks] = useState<TeamRanks[]>([]);
+
+const sortedRanks:TeamRanks[] = useMemo(() => {
+  return [...teamRanks];
+}, [teamRanks]);
+
   const [gameStatus,setGameStatus]=useState<gameRound|null>(null)
+
   const [isDel, setIsDel] = useState<boolean>(false);
   const [isshow,setIsshow]=useState<boolean>(false);
   const [list,setList]=useState<number[]>([])
-  const show = ()=>{
+  const show = (id:number)=>{
      Promise.all([GameRank(id),GameStatus(id),ProposalList(id)]).then(([gameRank,gameStatus,proposalList]) => {
       console.log("🏆 GameRank =>", gameRank);
       console.log("🏆 GameStatus =>", gameStatus);
@@ -32,7 +38,7 @@ const BaseProposal = () => {
     });
   }
   useEffect(() => {
-    show()
+    show(id)
   }, [id, isDel]);
 
   return (
@@ -99,7 +105,7 @@ const BaseProposal = () => {
           
           style={{ flex: 1, boxShadow: "0 2px 8px rgba(0,0,0,0.1)" }}
         >
-        {gameStatus?.proposalStage===1? <SelectTeam    list={list}   teamRanks={teamRanks}/> :<Store teamRanks={teamRanks} id={id} />}
+        {gameStatus?.proposalStage===1? <SelectTeam  id={id} list={list}   teamRanks={sortedRanks}  /> :<Store teamRanks={sortedRanks} id={id} />}
         
         </Card>
       </div>

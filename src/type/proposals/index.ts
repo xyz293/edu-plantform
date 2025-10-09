@@ -13,5 +13,5 @@ export interface TeamRank{
 
 export interface Order{
      gameId: number;
-      roundTeamIds: number[][];
+    roundTeamIds: number[][];
 }
