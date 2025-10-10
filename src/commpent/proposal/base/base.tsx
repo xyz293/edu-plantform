@@ -7,15 +7,19 @@ import FirstStage from '../detail/fristStage'
 import ListSwitch from "./listSwitch";
 import {GameStatus,ProposalList} from '../../../api/game'
 import type {gameRound} from '../../../type/game/index'
+import type {Proposalslist} from "../../../type/proposals/index";
+import {useDel} from '../../../ulits/tool'
 import {useRef} from 'react'
 const { Title } = Typography;
-
+interface Pref{
+    proposal?:Proposalslist[]
+}
 const BaseProposal = () => {
-  const ref = useRef<null>(null)
+  const ref = useRef<Pref>(null)
   const params = useParams();
   const navigate = useNavigate();
   const id = Number(params.id);
-
+  const [proposal,setProposal] = useState<Proposalslist[]>([])
  const [teamRanks, setTeamRanks] = useState<TeamRanks[]>([]);
 
   const [gameStatus,setGameStatus]=useState<gameRound|null>(null)
@@ -36,7 +40,12 @@ const BaseProposal = () => {
   useEffect(() => {
     show(id)
   }, [id, isDel]);
-
+  
+  useEffect(()=>{
+     if(ref.current?.proposal){
+        setProposal(ref.current.proposal)
+     }
+  },[ref.current?.proposal])
   return (
    <div
   style={{
@@ -120,13 +129,23 @@ const BaseProposal = () => {
           {gameStatus?.proposalRound===1&&
           <div>
             <h2>本轮提案小组：</h2>
+            <div style={{display:'flex',flexWrap:'wrap',gap:16}}>
+                      {proposal.map((item)=>{
+                        return <div key={item.id} style={{border:'1px solid #e8e8e8',padding:16,borderRadius:8,boxShadow:'0 2px 8px rgba(0,0,0,0.05)'}}>
+                        <h2>提案小组{item.id}</h2>
+
+                        </div>
+                      })}
+            </div>
             </div>
             }
         </div>
       </div>
     </Card>
     {/* 队伍排名 */}
-    <FirstStage teamRanks={teamRanks} id={id} setIsDel={setIsDel} isDel={isDel} gameStatus={gameStatus} list={list} ref={ref}/>
+   <useDel.Provider value={{setIsDel,isDel}}>
+    <FirstStage teamRanks={teamRanks} id={id} gameStatus={gameStatus} list={list} ref={ref} />
+    </useDel.Provider>
   </div>
 
   {/* 队伍排名 Modal */}

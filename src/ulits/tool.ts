@@ -1,4 +1,5 @@
 import {createContext} from 'react'
+import type {Context} from '../type/hock/index'
 import type {game} from '../type/game/index'
 export const getToken = () => {
   const user = localStorage.getItem('user')
@@ -53,3 +54,8 @@ export function splitThree(n: number): [number, number, number] {
 
     return result as [number, number, number]
 }
+
+export const useDel = createContext<Context>({
+    setIsDel:()=>{},
+    isDel:false,
+})

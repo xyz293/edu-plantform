@@ -8,22 +8,34 @@ import type { gameRound } from "../../../type/game/index";
 import FirstProposal from '../base/firstProposal'
 import {useRef} from 'react'
 import {forwardRef,useImperativeHandle} from 'react'
+import type {Pref} from '../../../type/hock/index'
+import {useState,useEffect} from 'react'
+import type {Proposalslist} from '../../../type/proposals/index'
+import {useDel} from '../../../ulits/tool'
+import {useContext} from 'react'
 interface Props{
   teamRanks:TeamRanks[]
   id:number
-  setIsDel:(isDel:boolean)=>void
-  isDel:boolean
   gameStatus:gameRound |null    
   list:number[]
 }
-const FristStage =forwardRef(({teamRanks,id,setIsDel,isDel,gameStatus,list}:Props,pref)=>{
+const FristStage =forwardRef<Pref,Props>(({teamRanks,id,gameStatus,list}:Props,pref)=>{   //通过子组件暴露方法或者属性一般是等子组件加载之后进行的
     const sortedRanks = useMemo(() => {
       return [...teamRanks]
     }, [teamRanks]);
-    const cref = useRef<null>(null)
+    const cref = useRef<Pref>(null)
+    console.log(cref.current?.proposal)
+      const [proposal,setProposal] = useState<Proposalslist[]>([])
+      const {isDel,setIsDel} = useContext(useDel)
+    useEffect(()=>{
+        if(cref.current?.proposal){
+            console.log(cref.current.proposal)
+            setProposal(cref.current.proposal)
+        }
+    },[cref.current?.proposal])
     useImperativeHandle(pref,()=>(
         {
-             proposal:cref.current? //之后会暴露方法
+            proposal:proposal || []
         }
     ))
     const show =()=>{
@@ -33,6 +45,8 @@ const FristStage =forwardRef(({teamRanks,id,setIsDel,isDel,gameStatus,list}:Prop
             case 0:
                 return  <Store teamRanks={sortedRanks} id={id} />
              case 2:
+                return <FirstProposal id={id} gameStatus={gameStatus} ref={cref}  />
+            case 3:
                 return <FirstProposal id={id} gameStatus={gameStatus} ref={cref} />
         }
     }

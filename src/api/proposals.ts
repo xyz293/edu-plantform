@@ -26,6 +26,5 @@ export const ProposalsOrder =(data:Order)=>{
 }
 
 export const ProposalsUpload =(data:ProposalsResponse)=>{
-    console.log(data)
     return request.post('/proposal/upload/first',data)
 }

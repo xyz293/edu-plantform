@@ -36,3 +36,14 @@ export interface ProposalsResponse{
     num: number;
     proposals: Proposals[];
 }
+export interface Voteinit{
+        teamId: number;
+        score: number;
+        proposalId: number;
+}
+export interface Vote{
+    gameId: number;
+    round: number;
+    votes: Voteinit[];
+    hasTie: boolean;
+}
