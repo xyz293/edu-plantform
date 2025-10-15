@@ -4,9 +4,10 @@ import {login} from '../../../api/user'
 import type {Logininfo} from '../../../type/user/index'
 import {useState} from 'react'
 import userStore from '../../../store/index'
+import {setCookie} from '../../../ulits/cookie'
 const Login = () => {
   const navigate = useNavigate();
-   const {setToken,setId,setAvatar,setNickname,setEmail} = userStore()
+   const {setId,setAvatar,setNickname,setEmail} = userStore()
   const [user,setUser] = useState<Logininfo>({
     username:'',
     password:'',
@@ -47,7 +48,8 @@ const Login = () => {
               login(user).then(res=>{
                 console.log(res)
                 if(res.data.code === 200){
-                setToken(res.data.data.token)
+                //setToken(res.data.data.token)
+                 setCookie('token',res.data.data.token,3)
                   setId(res.data.data.id)
                   setAvatar(res.data.data.avatar)
                   setNickname(res.data.data.nickname)

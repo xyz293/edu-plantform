@@ -1,10 +1,10 @@
 # Details
 
-Date : 2025-10-09 22:10:49
+Date : 2025-10-10 22:03:17
 
 Directory : ./src
 
-Total : 56 files,  3665 codes, 65 comments, 315 blanks, all 4045 lines, 1.74% comment rate
+Total : 56 files,  3963 codes, 68 comments, 327 blanks, all 4358 lines, 1.69% comment rate
 
 [summary](results.md)
 
@@ -14,7 +14,7 @@ Total : 56 files,  3665 codes, 65 comments, 315 blanks, all 4045 lines, 1.74% co
 | [App.tsx](../src\App.tsx) | TypeScript JSX | 11 | 0 | 2 | 13 | 0.00% |
 | [api\class.ts](../src\api\class.ts) | TypeScript | 40 | 0 | 6 | 46 | 0.00% |
 | [api\game.ts](../src\api\game.ts) | TypeScript | 108 | 0 | 25 | 133 | 0.00% |
-| [api\proposals.ts](../src\api\proposals.ts) | TypeScript | 26 | 0 | 5 | 31 | 0.00% |
+| [api\proposals.ts](../src\api\proposals.ts) | TypeScript | 25 | 0 | 5 | 30 | 0.00% |
 | [api\team.ts](../src\api\team.ts) | TypeScript | 4 | 0 | 0 | 4 | 0.00% |
 | [api\user.ts](../src\api\user.ts) | TypeScript | 47 | 0 | 3 | 50 | 0.00% |
 | [assets\react.svg](../src\assets\react.svg) | XML | 1 | 0 | 0 | 1 | 0.00% |
@@ -33,15 +33,15 @@ Total : 56 files,  3665 codes, 65 comments, 315 blanks, all 4045 lines, 1.74% co
 | [commpent\game\detail\perosnRank.tsx](../src\commpent\game\detail\perosnRank.tsx) | TypeScript JSX | 55 | 0 | 3 | 58 | 0.00% |
 | [commpent\game\detail\teamRank.tsx](../src\commpent\game\detail\teamRank.tsx) | TypeScript JSX | 25 | 0 | 3 | 28 | 0.00% |
 | [commpent\game\detail\upload.tsx](../src\commpent\game\detail\upload.tsx) | TypeScript JSX | 159 | 0 | 11 | 170 | 0.00% |
-| [commpent\proposal\base\base.tsx](../src\commpent\proposal\base\base.tsx) | TypeScript JSX | 139 | 0 | 11 | 150 | 0.00% |
-| [commpent\proposal\base\firstProposal.tsx](../src\commpent\proposal\base\firstProposal.tsx) | TypeScript JSX | 83 | 0 | 6 | 89 | 0.00% |
+| [commpent\proposal\base\base.tsx](../src\commpent\proposal\base\base.tsx) | TypeScript JSX | 159 | 0 | 10 | 169 | 0.00% |
+| [commpent\proposal\base\firstProposal.tsx](../src\commpent\proposal\base\firstProposal.tsx) | TypeScript JSX | 203 | 3 | 11 | 217 | 1.46% |
 | [commpent\proposal\base\listSwitch.tsx](../src\commpent\proposal\base\listSwitch.tsx) | TypeScript JSX | 38 | 0 | 2 | 40 | 0.00% |
 | [commpent\proposal\base\selectTeam.tsx](../src\commpent\proposal\base\selectTeam.tsx) | TypeScript JSX | 171 | 34 | 22 | 227 | 16.59% |
 | [commpent\proposal\base\store.tsx](../src\commpent\proposal\base\store.tsx) | TypeScript JSX | 67 | 0 | 5 | 72 | 0.00% |
 | [commpent\proposal\base\teamRank.tsx](../src\commpent\proposal\base\teamRank.tsx) | TypeScript JSX | 67 | 0 | 6 | 73 | 0.00% |
 | [commpent\proposal\base\teamlist.tsx](../src\commpent\proposal\base\teamlist.tsx) | TypeScript JSX | 135 | 0 | 9 | 144 | 0.00% |
-| [commpent\proposal\base\voteModal.tsx](../src\commpent\proposal\base\voteModal.tsx) | TypeScript JSX | 91 | 0 | 11 | 102 | 0.00% |
-| [commpent\proposal\detail\fristStage.tsx](../src\commpent\proposal\detail\fristStage.tsx) | TypeScript JSX | 73 | 0 | 2 | 75 | 0.00% |
+| [commpent\proposal\base\voteModal.tsx](../src\commpent\proposal\base\voteModal.tsx) | TypeScript JSX | 217 | 0 | 17 | 234 | 0.00% |
+| [commpent\proposal\detail\fristStage.tsx](../src\commpent\proposal\detail\fristStage.tsx) | TypeScript JSX | 87 | 0 | 2 | 89 | 0.00% |
 | [hock\vircuallist.tsx](../src\hock\vircuallist.tsx) | TypeScript JSX | 7 | 0 | 2 | 9 | 0.00% |
 | [main.tsx](../src\main.tsx) | TypeScript JSX | 8 | 0 | 5 | 13 | 0.00% |
 | [page\user\admir\class\Detail.tsx](../src\page\user\admir\class\Detail.tsx) | TypeScript JSX | 148 | 0 | 7 | 155 | 0.00% |
@@ -60,12 +60,12 @@ Total : 56 files,  3665 codes, 65 comments, 315 blanks, all 4045 lines, 1.74% co
 | [type\Team\index.ts](../src\type\Team\index.ts) | TypeScript | 19 | 0 | 1 | 20 | 0.00% |
 | [type\class\index.ts](../src\type\class\index.ts) | TypeScript | 23 | 0 | 1 | 24 | 0.00% |
 | [type\game\index.ts](../src\type\game\index.ts) | TypeScript | 93 | 1 | 18 | 112 | 1.06% |
-| [type\hock\index.ts](../src\type\hock\index.ts) | TypeScript | 5 | 0 | 0 | 5 | 0.00% |
-| [type\proposals\index.ts](../src\type\proposals\index.ts) | TypeScript | 33 | 0 | 5 | 38 | 0.00% |
+| [type\hock\index.ts](../src\type\hock\index.ts) | TypeScript | 8 | 0 | 1 | 9 | 0.00% |
+| [type\proposals\index.ts](../src\type\proposals\index.ts) | TypeScript | 44 | 0 | 5 | 49 | 0.00% |
 | [type\user\index.ts](../src\type\user\index.ts) | TypeScript | 21 | 0 | 2 | 23 | 0.00% |
 | [ulits\config.ts](../src\ulits\config.ts) | TypeScript | 2 | 0 | 0 | 2 | 0.00% |
 | [ulits\reuqest.ts](../src\ulits\reuqest.ts) | TypeScript | 36 | 8 | 5 | 49 | 18.18% |
-| [ulits\tool.ts](../src\ulits\tool.ts) | TypeScript | 47 | 0 | 8 | 55 | 0.00% |
+| [ulits\tool.ts](../src\ulits\tool.ts) | TypeScript | 52 | 0 | 9 | 61 | 0.00% |
 | [vite-env.d.ts](../src\vite-env.d.ts) | TypeScript | 0 | 1 | 1 | 2 | 100.00% |
 
 [summary](results.md)

@@ -1,6 +1,6 @@
 import axios from 'axios'
-import {getToken} from '../ulits/tool'
 import { baseURL, timeout } from './config'
+import {getCookie} from './cookie'
 const request = axios.create({
   baseURL,
   timeout
@@ -10,7 +10,7 @@ const request = axios.create({
 const map = new Map()
 request.interceptors.request.use(function (config) {
     // 在发送请求之前做些什么
-    const token = getToken()
+    const token = getCookie('token')
    
     if(token){
       config.headers["Authorization"] =token  
