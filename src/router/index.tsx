@@ -17,6 +17,13 @@ const BaseGameControl = lazy(() => import('../commpent/game/base/baseGame'))
 const Gamelist = lazy(() => import('../commpent/game/base/gameList'))
 const GameDetail =lazy(()=>import('../page/user/admir/game/detail'))
 const BaesProposal =lazy(()=>import('../commpent/proposal/base/base'))
+const prel =[
+  () => import('../commpent/game/base/gameList'),
+  () => import('../page/user/admir/class/Detail'),
+  () => import('../commpent/game/base/baseGame'),
+  ()=>import('../page/user/admir/game/detail'),
+  () => import('../page/user/admir/class/index')
+]
 const router =[
   {
     path:'/login',
@@ -139,4 +146,7 @@ const router =[
         )
       },
 ]
-export default router
+export default {
+  router,
+  prel,
+}
